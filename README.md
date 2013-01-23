@@ -22,7 +22,7 @@ CONSTANTS START WITH _, UPPERCASE VARIABLES DECLARATIONS ARE NOT ALLOWED
 
     V _pi = 3.14 				            var pi = 3.14;
 
-SSIGNMENT IS MOST CERTAINLY NOT INITIALIZATION
+ASSIGNMENT IS MOST CERTAINLY NOT INITIALIZATION
 
     V x = 1 					            var x = 1;
     x = x + 1 					            x = x + 1;
