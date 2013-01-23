@@ -1,6 +1,6 @@
 # Spitfire
 
-Spitfire is a language that allows the user to implement solutions as fast as possible using the least amount of keystones. It relies on indentation. It makes all other languages it’s bitch.
+Spitfire is a language that allows the user to implement solutions as fast as possible using the least amount of keystones. Ain't nobody got time to type out whole words!
 
 ### Examples
 
@@ -16,9 +16,9 @@ Variable Declaration
 Parallel declaration
 
     V s,f = spit,fire 				var s = spit;
-						var f = fire;
+    						var f = fire;
 
-Constants, upper case variables are not allowed, starts with _
+CONSTANTS START WITH _, UPPERCASE VARIABLES DECLARATIONS ARE NOT ALLOWED
 
     V _pi = 3.14 				var pi = 3.14;
 
@@ -32,19 +32,19 @@ Arithmetic expression
 
     y / (4 - x) * 2.5 				y / (4 - x) * 2.5
 
-Swap
+SWAP
 
     V x = 34 					var x = 34
     V y = 16 					var y = 16
     x SW y
 
-Booleans 
+BOOLEANS 
 
     T						true
     F						false
     5 > 7					5 > 7
 
-Functions
+FUNCTIONS
 
     V b = D (pounds,inches) 
         V _kilograms_per_pound = = 0.45359237
@@ -54,75 +54,59 @@ Functions
         R kilos / (meters * meters)
     Z
 
+KEYWORDS
 
-    I(T.ty.e(B)){P “hi”}  //if the typeof true is equal to boolean, print hi
-
-Keywords
-
-    I >> if 
-    E >> else 
-    EF >> else if 
-    D >> define function
-    FO >> for 
-    W >> while
-    A >> array
-
-EXAMPLES
-
-    I 5 > 2 P T // If 5 is greater than 2, print “true”. 
-    I T == T P T E P F // if true is true, print true, else print
+    I						if 
+    E						else 
+    EF						else if 
+    D						define function
+    FO						for 
+    W						while
 
 TYPES 
 
-    B >> boolean 
-    T >> true constant
-    F >> false constant 
-    N >> number (int) 
-    N+ >> number (long) 
-    N- >> number (short) 
-    S >> string 
-    C >> character 
-    V >> var 
-    G >> global variable?
+    B						boolean 
+    N						number (int)
+    S						string 
+    C						character
+    A						array
+    V						var 
+    G						global variable
+    NL						null
 
 METHODS
-
-    P >> print P “Hello world!”
-    .ty >> typeof 
-        T.ty >> boolean 
-    .si >> sizeof 
-        S s “Hello” 
-        s.si >> 5
-
-Variables
-
-    local variable >> V x = 1 
-    global variable >> G x = 1 
-    assignment >> x = 1 
-    NL >> Null
-
-Strings
-
-    Concatenation >> C.“Hello”,“World” 		s = “hello” + “world”; 
-    Split >> SP.“hello,world” 			“hello, world”.split(“”); 
-    Join >> J.(“hel”,”lo”) “hel”,		“lo”.join(“”);
-    Strip >> “hello, joe”.rm
-    Length >> “howdy”.L 
-    Index Of String >> “try this”.IoS 
-    String to Number >> 3 + StN(“2”) 
-    Number to String >> NtS(3)
-
-For loops 
  
-    FO(i,0,5){P i} for (var i = 0; i <5; i++) { console.log(i); }
+    T.ty					true.typeof()
+ 
+    S s “Hello” 				String s = "Hello";
+    P s.si					console.log(s.size()); 
 
-    FO(i,2,7,+2){P i*i} for(var i = 2; i < 7; i +=2){ console.log(i*i); } FO(x,7,0,-3).... for(var i = 7; i > 0; i-=3)
+STRINGS
 
-While loops 
+    "Hello”,“world!”.c 				s = “Hello” + “world!”; 
+    “Hello, world!".sp(" ")	 			“Hello, world!”.split(“ "); 
+    “Spit”,”fire".j				“Spit”,“fire”.join(“”);
+    Strip >> “hello, joe”.rm
+    “Spitfire”.l				"Spitfire".length(); 
+    “Spitfire is quick”.ios("i")		"Spitfire is quick".indexOf("i");				
+    “2”.stn 					parseInt("2");
+    3.nts					3.toString()
+
+FOR LOOPS
+ 
+    FO(i,0,5){P i} 				for (var i = 0; i <5; i++) {
+    						    console.log(i);
+    						}
+
+    FO(i,2,7,+2){P i*i} 			for(var i = 2; i < 7; i +=2) {
+    						    console.log(i*i); } 
+    FO(x,7,0,-3).... 				for(var i = 7; i > 0; i-=3)
+
+WHILE LOOPS
 
     W(x>10){I(x<5){x-2}E{x-1};P x;}
 
-Arrays 
+ARRAYS 
 
     A p = [100, 43, 22, 5, 8]			var p = [100, 43, 22, 5, 8];
     P p[0]					console.log(p[0]);
