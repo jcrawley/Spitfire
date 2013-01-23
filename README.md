@@ -1,19 +1,19 @@
 # Spitfire
 
-Spitfire is a language that allows the user to implement solutions as fast as possible using the least amount of keystones. Ain't nobody got time to type out whole words!
+Spitfire is a language that allows the user to implement solutions as fast as possible using the least amount of keystones. Ain't nobody got time to type out whole words! One day in class, Joe said I want to make a language that spits fire. On that fateful day, we knew we had our name.
 
 ### Examples
 
-Spitfire on the left, Javascript on the right
+SPITFIRE ON THE LEFT, JAVASCRIPT ON THE RIGHT
 
     P “Hello, world!” 				        console.log(“Hello, world!”);
 
-Variable Declaration
+VARIABLE DECLARATIONS
 
     V s = spit 					            var v = spit; 
     V f = fire 					            var f = fire;
 
-Parallel declaration
+PARALLEL DECLARATION
 
     V s,f = spit,fire 				        var s = spit;
     						                var f = fire;
@@ -22,13 +22,13 @@ CONSTANTS START WITH _, UPPERCASE VARIABLES DECLARATIONS ARE NOT ALLOWED
 
     V _pi = 3.14 				            var pi = 3.14;
 
-Assignment is not initialization
+SSIGNMENT IS MOST CERTAINLY NOT INITIALIZATION
 
     V x = 1 					            var x = 1;
     x = x + 1 					            x = x + 1;
     P x                                     console.log(x);
 
-Arithmetic expression
+ARITHMETIC EXPRESSIOSN
 
     y / (4 - x) * 2.5 				        y / (4 - x) * 2.5
 
@@ -94,15 +94,15 @@ STRINGS
 
 FOR LOOPS
  
-    FO(i,0,5){P i} 				        for (var i = 0; i <5; i++) {
-    						                console.log(i);
-                                        }
+    FO(i,0,5){P i}                          for (var i = 0; i <5; i++) {
+                                                console.log(i);
+                                            }
 
-    FO(i,2,7,+2){P i*i} 			    for(var i = 2; i < 7; i +=2) {
-    						                console.log(i*i);
-                                        } 
+    FO(i,2,7,+2){P i*i}                     for(var i = 2; i < 7; i +=2) {
+                                                console.log(i*i);
+                                            }
                                         
-    FO(x,7,0,-3).... 				    for(var i = 7; i > 0; i-=3)
+    FO(x,7,0,-3).... 				        for(var i = 7; i > 0; i-=3)
 
 WHILE LOOPS
 
@@ -110,8 +110,8 @@ WHILE LOOPS
 
 ARRAYS 
 
-    A p = [100, 43, 22, 5, 8]			var p = [100, 43, 22, 5, 8];
-    P p[0]					console.log(p[0]);
-    V q = p					var q = p;
+    A p = [100, 43, 22, 5, 8]			    var p = [100, 43, 22, 5, 8];
+    P p[0]					                console.log(p[0]);
+    V q = p					                var q = p;
     A a = [88, false, “0001”, green]		var a = [88, false, “0001”, green]; 
-    P a.length					console.log(a.length);
+    P a.length					            console.log(a.length);
