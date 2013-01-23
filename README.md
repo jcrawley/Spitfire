@@ -124,8 +124,8 @@ While loops
 
 Arrays 
 
-    A p = [100, 43, 22, 5, 8] 			var p = [100, 43, 22, 5, 8];
+    A p = [100, 43, 22, 5, 8]			var p = [100, 43, 22, 5, 8];
     P p[0]					console.log(p[0]);
-    V q = p 					var q = p;
-    A a = [88, false, “0001”, green] 		var a = [88, false, “0001”, green]; 
-    P a.length 					console.log(a.length);
+    V q = p					var q = p;
+    A a = [88, false, “0001”, green]		var a = [88, false, “0001”, green]; 
+    P a.length					console.log(a.length);
