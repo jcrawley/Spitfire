@@ -106,7 +106,11 @@ FOR LOOPS
 
 WHILE LOOPS
 
-    W(x>10){I(x<5){x-2}E{x-1};P x;}
+    W(x>10){I(x<5){x=x-2}E{x=x-1};P x;}         while(x>10){
+                                                    if(x<5){x = x - 2}
+                                                    else{x=x-1}
+                                                    console.log(x)
+                                                }
 
 ARRAYS 
 
