@@ -6,43 +6,43 @@ Spitfire is a language that allows the user to implement solutions as fast as po
 
 Spitfire on the left, Javascript on the right
 
-    P “Hello, world!” 				console.log(“Hello, world!”);
+    P “Hello, world!” 				        console.log(“Hello, world!”);
 
 Variable Declaration
 
-    V s = spit 					var v = spit; 
-    V f = fire 					var f = fire;
+    V s = spit 					            var v = spit; 
+    V f = fire 					            var f = fire;
 
 Parallel declaration
 
-    V s,f = spit,fire 				var s = spit;
-    						var f = fire;
+    V s,f = spit,fire 				        var s = spit;
+    						                var f = fire;
 
 CONSTANTS START WITH _, UPPERCASE VARIABLES DECLARATIONS ARE NOT ALLOWED
 
-    V _pi = 3.14 				var pi = 3.14;
+    V _pi = 3.14 				            var pi = 3.14;
 
 Assignment is not initialization
 
-    V x = 1 					var x = 1;
-    x = x + 1 					x = x + 1;
-    P x 					console.log(x);
+    V x = 1 					            var x = 1;
+    x = x + 1 					            x = x + 1;
+    P x                                     console.log(x);
 
 Arithmetic expression
 
-    y / (4 - x) * 2.5 				y / (4 - x) * 2.5
+    y / (4 - x) * 2.5 				        y / (4 - x) * 2.5
 
 SWAP
 
-    V x = 34 					var x = 34
-    V y = 16 					var y = 16
+    V x = 34 					            var x = 34;
+    V y = 16 					            var y = 16;
     x SW y
 
 BOOLEANS 
 
-    T						true
-    F						false
-    5 > 7					5 > 7
+    T					                	true
+    F						                false
+    5 > 7					                5 > 7
 
 FUNCTIONS
 
@@ -56,51 +56,53 @@ FUNCTIONS
 
 KEYWORDS
 
-    I						if 
-    E						else 
-    EF						else if 
-    D						define function
-    FO						for 
-    W						while
+    I					                	if 
+    E				                		else 
+    EF			                			else if 
+    D			                			define function
+    FO			                  			for 
+    W	                					while
 
 TYPES 
 
-    B						boolean 
-    N						number (int)
-    S						string 
-    C						character
-    A						array
-    V						var 
-    G						global variable
-    NL						null
+    B			                			boolean 
+    N				                		number (int)
+    S		                				string 
+    C			                			character
+    A		                				array
+    V			                			var 
+    G			                			global variable
+    NL			                			null
 
 METHODS
  
-    T.ty					true.typeof()
+    T.ty	               	    			true.typeof()
  
-    S s “Hello” 				String s = "Hello";
-    P s.si					console.log(s.size()); 
+    S s “Hello” 	            			String s = "Hello";
+    P s.si			                		console.log(s.size()); 
 
 STRINGS
 
-    "Hello”,“world!”.c 				s = “Hello” + “world!”; 
-    “Hello, world!".sp(" ")	 			“Hello, world!”.split(“ "); 
-    “Spit”,”fire".j				“Spit”,“fire”.join(“”);
+    "Hello”,“world!”.c  	        		s = “Hello” + “world!”; 
+    “Hello, world!".sp(" ")                 “Hello, world!”.split(“ "); 
+    “Spit”,”fire".j                         “Spit”,“fire”.join(“”);
     Strip >> “hello, joe”.rm
-    “Spitfire”.l				"Spitfire".length(); 
-    “Spitfire is quick”.ios("i")		"Spitfire is quick".indexOf("i");				
-    “2”.stn 					parseInt("2");
-    3.nts					3.toString()
+    “Spitfire”.l                            "Spitfire".length(); 
+    “Spitfire is quick”.ios("i")            "Spitfire is quick".indexOf("i");				
+    “2”.stn                                 parseInt("2");
+    3.nts                                   3.toString()
 
 FOR LOOPS
  
-    FO(i,0,5){P i} 				for (var i = 0; i <5; i++) {
-    						    console.log(i);
-    						}
+    FO(i,0,5){P i} 				        for (var i = 0; i <5; i++) {
+    						                console.log(i);
+                                        }
 
-    FO(i,2,7,+2){P i*i} 			for(var i = 2; i < 7; i +=2) {
-    						    console.log(i*i); } 
-    FO(x,7,0,-3).... 				for(var i = 7; i > 0; i-=3)
+    FO(i,2,7,+2){P i*i} 			    for(var i = 2; i < 7; i +=2) {
+    						                console.log(i*i);
+                                        } 
+                                        
+    FO(x,7,0,-3).... 				    for(var i = 7; i > 0; i-=3)
 
 WHILE LOOPS
 
