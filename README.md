@@ -1,6 +1,6 @@
 # Spitfire
 
-Spitfire is a language that allows the user to implement solutions as fast as possible using the least amount of keystones. Ain't nobody got time to type out whole words! One day in class, Joe said I want to make a language that spits fire. On that fateful day, we knew we had our name.
+Spitfire is a language that allows the user to implement solutions as fast as possible using the least amount of keystones. Ain't nobody got time to type out whole words! One day in class, `jcrawley` said I want to make a language that spits fire. On that fateful day, we knew we had our name.
 
 ### Examples
 
@@ -36,7 +36,15 @@ SWAP
 
     V x = 34 					            var x = 34;
     V y = 16 					            var y = 16;
-    x SW y
+    x SW y                                  _1 = x;
+                                            _2 = y;
+                                            x = _2;
+                                            y = _1;
+    
+    P x,y                                   console.log(x);
+                                            console.log(y);
+                                            
+    P x+y                                   console.log(x+y);
 
 BOOLEANS 
 
