@@ -28,7 +28,7 @@ ASSIGNMENT IS MOST CERTAINLY NOT INITIALIZATION
     x = x + 1 					            x = x + 1;
     P x                                     console.log(x);
 
-ARITHMETIC EXPRESSIOSN
+ARITHMETIC EXPRESSIONS
 
     y / (4 - x) * 2.5 				        y / (4 - x) * 2.5
 
@@ -73,6 +73,12 @@ TYPES
     V			                			var 
     G			                			global variable
     NL			                			null
+
+TYPES OF NUMBERS
+
+    NB b = 011101                           
+    NH h = 267AC1                           var h = 0x267AC1;
+    NO o = 337                              var o = 0337;
 
 METHODS
  
