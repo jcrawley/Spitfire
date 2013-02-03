@@ -143,9 +143,9 @@ SYNTAX IN PROGRESS
                   |  LOOP
                   |  PROCCALL
     DEC           →  VARDEC | CONSTDEC | PROCDEC | FUNDEC
-    VARDEC        →  ID (',' ID)* ':=' EXP (',' EXP)*
-                  |  OBJECT
-    CONSTDEC      →  ID '!' (',' ID'!')* ':=' EXP (',' EXP)*
+    VARDEC        →  V ID | NUM ID
+    NUM           →  NB | NH | NO
+    CONSTDEC      →  '_' VARDEC
     PROCDEC       →  ID ':= f: (' PARAMS ') ->' BLOCK
     FUNDEC        →  ID ':= f: (' PARAMS ') ->' BLOCK
     PARAMS        →  () | ( )*
@@ -174,4 +174,4 @@ SYNTAX IN PROGRESS
     MULOP         →  '*' | '/' | '%' | '**'
     ADDOP         →  '+' | '-'
     RELOP         →  '<' | '<=' | '==' | '!=' | '>=' | '>' 
-    REGEX         → ...leaving this for the jazzier ones
+    REGEX         → ...Jon will do this part after his date
