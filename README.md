@@ -133,3 +133,45 @@ ARRAYS
     V q = p					                var q = p;
     A a = [88, false, “0001”, green]		var a = [88, false, “0001”, green]; 
     P a.length					            console.log(a.length);
+
+SYNTAX IN PROGRESS
+
+    SCRIPT        →  (STMT BR)+
+    STMT          →  DEC 
+                  |  PRINTSTMT
+                  |  CONDITIONAL
+                  |  LOOP
+                  |  PROCCALL
+    DEC           →  VARDEC | CONSTDEC | PROCDEC | FUNDEC
+    VARDEC        →  ID (',' ID)* ':=' EXP (',' EXP)*
+                  |  OBJECT
+    CONSTDEC      →  ID '!' (',' ID'!')* ':=' EXP (',' EXP)*
+    PROCDEC       →  ID ':= f: (' PARAMS ') ->' BLOCK
+    FUNDEC        →  ID ':= f: (' PARAMS ') ->' BLOCK
+    PARAMS        →  () | ( )*
+                  |  ID (',' ID)*
+    ASSIGNMENT    →  DEC | (ID ':=:' ID)              
+    PRINTSTMT     →  'p:' EXP
+    CONDITIONAL   →  '??:' EXP '?' STMT BR (CONDITIONAL)* (':' EXP '?' STMT BR (CONDITIONAL)*)*  BR (':' STMT )? '??'
+    LOOP          →  '8:' RANGE BLOCK
+    PROCCALL      →  (ID '('ARGS')') | ANONFUN
+    BOOL          →  'T' | 'F'   
+    ARRAY         →  '[' EXP* (',' EXP)* ']'
+    ARRREF        →  ID '[' '.' | [0-9]+ (('..' | '...') [0-9]+)? ']'
+    OBJECT        →  
+    HASH          → '#:{' (ID '->' EXP) (',' ID '->' EXP)* '}'
+    ANONFUN       → 'f:{' (EXP ('_'('_' | [0-9]+) EXP)*)* '}'
+    BLOCK         →  '{' STMT ('!!')? '}'
+                  |  '{' (STMT BR)+ ('!!')? '}'
+    EXP           →  EXP1 ('|' EXP1)*
+    EXP1          →  EXP2 ('&' EXP2)*
+    EXP2          →  EXP3 (RELOP EXP3)?
+    EXP3          →  EXP4 (MULOP EXP4)*
+    EXP4          →  EXP6 (ADDOP EXP6)*
+    EXP6          →  EXP7 ('[' EXP (':' EXP)? ']')?
+    EXP7          →  EXP8 ('.' ID)?
+    EXP8          →  LIT | ID | ARRAY | OBJECT | ANONFUN | PROCCALL | HASH | BOOL
+    MULOP         →  '*' | '/' | '%' | '**'
+    ADDOP         →  '+' | '-'
+    RELOP         →  '<' | '<=' | '==' | '!=' | '>=' | '>' 
+    REGEX         → ...leaving this for the jazzier ones
