@@ -150,8 +150,8 @@ SYNTAX IN PROGRESS
     FUNDEC        →  ID ':= f: (' PARAMS ') ->' BLOCK
     PARAMS        →  () | ( )*
                   |  ID (',' ID)*
-    ASSIGNMENT    →  DEC | (ID ':=:' ID)              
-    PRINTSTMT     →  'p:' EXP
+    ASSIGNMENT    →  DEC | (ID '=' ID)              
+    PRINTSTMT     →  'P' EXP
     CONDITIONAL   →  '??:' EXP '?' STMT BR (CONDITIONAL)* (':' EXP '?' STMT BR (CONDITIONAL)*)*  BR (':' STMT )? '??'
     LOOP          →  '8:' RANGE BLOCK
     PROCCALL      →  (ID '('ARGS')') | ANONFUN
