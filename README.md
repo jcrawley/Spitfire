@@ -138,20 +138,20 @@ SYNTAX IN PROGRESS
 
     SCRIPT        →  (STMT BR)+
     STMT          →  DEC
-              |  ASSIGNMENT
-              |  PRINTSTMT
-              |  CONDITIONAL
-              |  FORLOOP
-              |  WHILELOOP
-              |  PROCCALL
-              |  EXP
+                  |  ASSIGNMENT
+                  |  PRINTSTMT
+                  |  CONDITIONAL
+                  |  FORLOOP
+                  |  WHILELOOP
+                  |  PROCCALL
+                  |  EXP
     CONSTDEC      →  '_'ID EXP
     FUNDEC        →  ID 'D (' PARAMS ') ->' BLOCK
     PARAMS        →  ID + (‘,’ + ID)*
     ASSIGNMENT    →  (DEC | ID) ‘=’
     PRINTSTMT     →  'P' EXP
     CONDITIONAL   → ‘I’ EXP STMT | ‘EF’ EXP | ‘E” EXP 
-              | ‘I’ EXP BLOCK
+                  | ‘I’ EXP BLOCK
     FORLOOP       →  ‘FO’ PARAM BR
     WHILELOOP     →  ‘W’ EXP
     PRINTSTMT     →  ‘P’ EXP
