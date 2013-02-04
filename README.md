@@ -156,12 +156,12 @@ SYNTAX IN PROGRESS
     WHILELOOP     →  ‘W’ EXP
     PRINTSTMT     →  ‘P’ EXP
     RETURNSTMT    →  ‘R’ EXP
-
+    ID            →  [a-z] [a-z0-9]*    
     BOOL          →  ‘T’ | ‘F’ | 
-    ADDOP       →  '+' | '-'
-    MULOP       →  '*' | '/' | '%'
-    PREFIXOP    →  '-' | '!' | '~' | 'char' | 'int' | 'string' | 'length'
-    INCOP       →  '++' | '--'
+    ADDOP         →  '+' | '-'
+    MULOP         →  '*' | '/' | '%'
+    PREFIXOP      →  '-' | '!' | '~' | 'char' | 'int' | 'string' | 'length'
+    INCOP         →  '++' | '--'
 
 
 MICROSYNTAX
