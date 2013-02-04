@@ -10,21 +10,23 @@ SPITFIRE ON THE LEFT, JAVASCRIPT ON THE RIGHT
 
 VARIABLE DECLARATIONS
 
-    V s = spit 					            var v = spit; 
-    V f = fire 					            var f = fire;
+    S s = "spit" 					        var s = "spit"; 
+    S f = "fire" 					        var f = "fire";
+    B found = T                             var found = true;
+    N hex = 0x34A4                          var hex = 0x34A4;
 
 PARALLEL DECLARATION
 
-    V s,f = spit,fire 				        var s = spit;
-    						                var f = fire;
+    S s,f = "spit","fire" 				    var s = "spit";
+    						                var f = "fire";
 
 CONSTANTS START WITH _, UPPERCASE VARIABLES DECLARATIONS ARE NOT ALLOWED
 
-    V _pi = 3.14 				            var pi = 3.14;
+    N _pi = 3.14 				            var pi = 3.14;
 
 ASSIGNMENT IS MOST CERTAINLY NOT INITIALIZATION
 
-    V x = 1 					            var x = 1;
+    N x = 1 					            var x = 1;
     x = x + 1 					            x = x + 1;
     P x                                     console.log(x);
 
@@ -34,9 +36,9 @@ ARITHMETIC EXPRESSIONS
 
 SWAP
 
-    V x = 34 					            var x = 34;
-    V y = 16 					            var y = 16;
-    x SW y                                  _1 = x;
+    N x = 34 					            var x = 34;
+    N y = 16 					            var y = 16;
+    x <=> y                                 _1 = x;
                                             _2 = y;
                                             x = _2;
                                             y = _1;
@@ -51,87 +53,105 @@ BOOLEANS
     T					                	true
     F						                false
     5 > 7					                5 > 7
+    x /\ y                                  x && y
+    x \/ y                                  x || y
 
 FUNCTIONS
 
-    V b = D (pounds,inches) 
-        V _kilograms_per_pound = = 0.45359237
-        V _meters_per_inch = 0.0254
-        V kilos = pounds * _kilograms_per_pound
-        V inches = inches * _meters_per_inch
+    DF bmi (pounds,inches) 
+        N _kilograms_per_pound = 0.45359237
+        N _meters_per_inch = 0.0254
+        N kilos = pounds * _kilograms_per_pound
+        N inches = inches * _meters_per_inch
         R kilos / (meters * meters)
-    Z
 
 KEYWORDS
 
     I					                	if 
     E				                		else 
-    EF			                			else if 
-    D			                			define function
-    FO			                  			for 
-    W	                					while
+    EI			                			else if 
+    DF			                			define function
+    DC                                      define class
+    L			                  			loop (e.g. for, while)
+    R                                       return
 
 TYPES 
 
     B			                			boolean 
-    N				                		number (int)
+    N				                		number
     S		                				string 
     C			                			character
-    A		                				array
-    V			                			var 
-    G			                			global variable
-    NL			                			null
+    []		                				array
+    Y                                       any
+    <>			                			null
+    
+CLASSES
+
+    DC point
+      N x
+      N y
+      S color
+      
+    point p = point.new(4,5,"purple")
+    
+    DC polygon
+      [point] vertices
+      
 
 TYPES OF NUMBERS
-
-    NB b = 011101                           
-    NH h = 267AC1                           var h = 0x267AC1;
-    NO o = 337                              var o = 0337;
+                        
+    N h = 0x267AC1                          var h = 0x267AC1;
+    N o = 0337                              var o = 0337;
 
 METHODS
  
-    T.ty	               	    			true.typeof()
+    T.ty	               	    			typeof true
  
-    S s “Hello” 	            			String s = "Hello";
-    P s.si			                		console.log(s.size()); 
+    S s = “Hello” 	            			var s = "Hello";
+    P s.l			                		console.log(s.length()); // perhaps |s|
 
 STRINGS
 
     "Hello”,“world!”.c  	        		s = “Hello” + “world!”; 
-    “Hello, world!".sp(" ")                 “Hello, world!”.split(“ "); 
-    “Spit”,”fire".j                         “Spit”,“fire”.join(“”);
-    Strip >> “hello, joe”.rm
+    “Hello, world!" | " "                   “Hello, world!”.split(“ "); // perhaps symbols for split(string) and join(array), | or j
+    [“Spit”,”fire"] @ "-"                   [“Spit”, “fire”].join(“”);
     “Spitfire”.l                            "Spitfire".length(); 
-    “Spitfire is quick”.ios("i")            "Spitfire is quick".indexOf("i");				
-    “2”.stn                                 parseInt("2");
-    3.nts                                   3.toString()
+    “Spitfire is quick”.f("i")              "Spitfire is quick".indexOf("i"); // .pos .ix				
+    “2”.num                                 parseInt("2");
+    3.str                                   3 .toString();
 
-FOR LOOPS
+LOOPS
  
-    FO(i,0,5){P i}                          for (var i = 0; i <5; i++) {
-                                                console.log(i);
+    LU 5                                    for (var i = 0; i <5; i++) {
+      P i                                       console.log(i);                                          
                                             }
 
-    FO(i,2,7,+2){P i*i}                     for(var i = 2; i < 7; i +=2) {
-                                                console.log(i*i);
+    LF i 2 7 2                              for (var i = 2; i < 7; i +=2) {
+      P i*i                                     console.log(i*i);
                                             }
                                         
-    FO(x,7,0,-3).... 				        for(var i = 7; i > 0; i-=3)
+    LF i 7 0 -3 				            for (var i = 7; i > 0; i-=3) {
+                    
+                                            }
+                                            
+    LF x a                                  a.forEach(function (x) {console.log(x)});
+      P i
 
-WHILE LOOPS
-
-    W(x>10){I(x<5){x=x-2}E{x=x-1};P x;}         while(x>10){
-                                                    if(x<5){x = x - 2}
-                                                    else{x=x-1}
-                                                    console.log(x)
-                                                }
+    LW x>10                                 while (x>10) {
+      I x<5                                     if (x<5) {
+        x=x-2                                       x = x - 2;
+      E                                         } else {
+        x=x-1                                       x = x - 1;
+      P x                                       }
+                                                console.log(x);
+                                            }
 
 ARRAYS 
 
-    A p = [100, 43, 22, 5, 8]			    var p = [100, 43, 22, 5, 8];
+    [N] p = [100, 43, 22, 5, 8]			    var p = [100, 43, 22, 5, 8];
     P p[0]					                console.log(p[0]);
-    V q = p					                var q = p;
-    A a = [88, false, “0001”, green]		var a = [88, false, “0001”, green]; 
+    [N] q = p					            var q = p;
+    [Y] a = [88, false, “0001”, green]		var a = [88, false, “0001”, green]; 
     P a.length					            console.log(a.length);
 
 SYNTAX IN PROGRESS
@@ -143,8 +163,8 @@ SYNTAX IN PROGRESS
                   |  CONDITIONAL
                   |  FORLOOP
                   |  WHILELOOP
-                  |  PROCCALL
                   |  EXP
+    DEC           →  
     CONSTDEC      →  '_'ID EXP
     FUNDEC        →  ID 'D (' PARAMS ') ->' BLOCK
     PARAMS        →  ID + (‘,’ + ID)*
