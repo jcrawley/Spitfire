@@ -162,6 +162,7 @@ SYNTAX IN PROGRESS
     MULOP         →  '*' | '/' | '%'
     PREFIXOP      →  '-' | '!' | '~' | 'char' | 'int' | 'string' | 'length'
     BLOCK         →  '{' STMT* '}'
+                  |  STMT NEWLINE 'Z'
 
 
 MICROSYNTAX
