@@ -158,7 +158,10 @@ SYNTAX IN PROGRESS
     RETURNSTMT    →  ‘R’ EXP
 
     BOOL          →  ‘T’ | ‘F’ | 
-    S s = “I hate Joe Crawley. He is a very terrible person.”
+    ADDOP       →  '+' | '-'
+    MULOP       →  '*' | '/' | '%'
+    PREFIXOP    →  '-' | '!' | '~' | 'char' | 'int' | 'string' | 'length'
+    INCOP       →  '++' | '--'
 
 
 MICROSYNTAX
