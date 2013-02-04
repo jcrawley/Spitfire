@@ -6,7 +6,7 @@ Spitfire is a language that allows the user to implement solutions as fast as po
 
 SPITFIRE ON THE LEFT, JAVASCRIPT ON THE RIGHT
 
-    P “Hello, world!” 				        console.log(“Hello, world!”);
+    P “Hello, world!”     			        console.log(“Hello, world!”);
 
 VARIABLE DECLARATIONS
 
@@ -120,16 +120,11 @@ FOR LOOPS
 
 WHILE LOOPS
 
-    W(x>10)                                 while(x>10){
-        I(x<5)                                  if(x<5){x = x - 2}
-            x=x-2                               else{x=x-1}
-        E x=x-1                                 console.log(x)
-        P x
-    Z                                       }
-                                                    
-                                                   
-                                                    
-                                                
+    W(x>10){I(x<5){x=x-2}E{x=x-1};P x;}         while(x>10){
+                                                    if(x<5){x = x - 2}
+                                                    else{x=x-1}
+                                                    console.log(x)
+                                                }
 
 ARRAYS 
 
@@ -142,41 +137,33 @@ ARRAYS
 SYNTAX IN PROGRESS
 
     SCRIPT        →  (STMT BR)+
-    STMT          →  DEC 
-                  |  PRINTSTMT
-                  |  CONDITIONAL
-                  |  LOOP
-                  |  PROCCALL
-    DEC           →  VARDEC | CONSTDEC | PROCDEC | FUNDEC
-    VARDEC        →  V ID | NUM ID
-    NUM           →  NB | NH | NO
-    CONSTDEC      →  '_' VARDEC
-    PROCDEC       →  ID ':= f: (' PARAMS ') ->' BLOCK
-    FUNDEC        →  ID ':= f: (' PARAMS ') ->' BLOCK
-    PARAMS        →  () | ( )*
-                  |  ID (',' ID)*
-    ASSIGNMENT    →  DEC | (ID '=' ID)              
+    STMT          →  DEC
+              |  ASSIGNMENT
+              |  PRINTSTMT
+              |  CONDITIONAL
+              |  FORLOOP
+              |  WHILELOOP
+              |  PROCCALL
+              |  EXP
+    CONSTDEC      →  '_'ID EXP
+    FUNDEC        →  ID 'D (' PARAMS ') ->' BLOCK
+    PARAMS        →  ID + (‘,’ + ID)*
+    ASSIGNMENT    →  (DEC | ID) ‘=’
     PRINTSTMT     →  'P' EXP
-    CONDITIONAL   →  '??:' EXP '?' STMT BR (CONDITIONAL)* (':' EXP '?' STMT BR (CONDITIONAL)*)*  BR (':' STMT )? '??'
-    LOOP          →  '8:' RANGE BLOCK
-    PROCCALL      →  (ID '('ARGS')') | ANONFUN
-    BOOL          →  'T' | 'F'   
-    ARRAY         →  '[' EXP* (',' EXP)* ']'
-    ARRREF        →  ID '[' '.' | [0-9]+ (('..' | '...') [0-9]+)? ']'
-    OBJECT        →  
-    HASH          → '#:{' (ID '->' EXP) (',' ID '->' EXP)* '}'
-    ANONFUN       → 'f:{' (EXP ('_'('_' | [0-9]+) EXP)*)* '}'
-    BLOCK         →  '{' STMT ('!!')? '}'
-                  |  '{' (STMT BR)+ ('!!')? '}'
-    EXP           →  EXP1 ('|' EXP1)*
-    EXP1          →  EXP2 ('&' EXP2)*
-    EXP2          →  EXP3 (RELOP EXP3)?
-    EXP3          →  EXP4 (MULOP EXP4)*
-    EXP4          →  EXP6 (ADDOP EXP6)*
-    EXP6          →  EXP7 ('[' EXP (':' EXP)? ']')?
-    EXP7          →  EXP8 ('.' ID)?
-    EXP8          →  LIT | ID | ARRAY | OBJECT | ANONFUN | PROCCALL | HASH | BOOL
-    MULOP         →  '*' | '/' | '%' | '**'
-    ADDOP         →  '+' | '-'
-    RELOP         →  '<' | '<=' | '==' | '!=' | '>=' | '>' 
-    REGEX         → ...Jon will do this part after his date
+    CONDITIONAL   → ‘I’ EXP STMT | ‘EF’ EXP | ‘E” EXP 
+              | ‘I’ EXP BLOCK
+    FORLOOP       →  ‘FO’ PARAM BR
+    WHILELOOP     →  ‘W’ EXP
+    PRINTSTMT     →  ‘P’ EXP
+    RETURNSTMT    →  ‘R’ EXP
+
+    BOOL          →  ‘T’ | ‘F’ | 
+    S s = “I hate Joe Crawley. He is a very terrible person.”
+
+
+MICROSYNTAX
+    COMMENT       → ‘$’ ()*  NEWLINE
+                  | ‘$$’ ()* ‘$$’
+    ID            →  [a-z]+ ([-_a-z0-9])*
+    NUMLIT        →  [0-9]+ ('.' [0-9]*)?
+    STRLIT        →  '"'  ( NUMLIT | [a-Z])*  '"'
