@@ -162,6 +162,7 @@ SYNTAX IN PROGRESS
 
 
 MICROSYNTAX
+
     COMMENT       → ‘$’ ()*  NEWLINE
                   | ‘$$’ ()* ‘$$’
     ID            →  [a-z]+ ([-_a-z0-9])*
