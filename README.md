@@ -161,7 +161,7 @@ SYNTAX IN PROGRESS
     ADDOP         →  '+' | '-'
     MULOP         →  '*' | '/' | '%'
     PREFIXOP      →  '-' | '!' | '~' | 'char' | 'int' | 'string' | 'length'
-    INCOP         →  '++' | '--'
+    BLOCK         →  '{' STMT* '}'
 
 
 MICROSYNTAX
