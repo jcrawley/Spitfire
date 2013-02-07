@@ -175,14 +175,12 @@ SYNTAX IN PROGRESS
     FORLOOP       →  ‘FO’ PARAM BR
     WHILELOOP     →  ‘W’ EXP
     PRINTSTMT     →  ‘P’ EXP
-    RETURNSTMT    →  ‘R’ EXP
-    ID            →  [a-z] [a-z0-9]*    
+    RETURNSTMT    →  ‘R’ EXP  
     BOOL          →  ‘T’ | ‘F’ | 
     ADDOP         →  '+' | '-'
     MULOP         →  '*' | '/' | '%'
     PREFIXOP      →  '-' | '!' | '~' | 'char' | 'int' | 'string' | 'length'
-    BLOCK         →  '{' STMT* '}'
-                  |  STMT NEWLINE 'Z'
+    BLOCK         →  STMT NEWLINE 'Z'
 
 
 MICROSYNTAX
