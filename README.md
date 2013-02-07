@@ -167,12 +167,12 @@ SYNTAX IN PROGRESS
     DEC           →  
     CONSTDEC      →  '_'ID EXP
     FUNDEC        →  ID 'D (' PARAMS ') ->' BLOCK
-    PARAMS        →  ID + (‘,’ + ID)*
+    PARAMS        →  ID (' 'ID)*
     ASSIGNMENT    →  (DEC | ID) ‘=’
     PRINTSTMT     →  'P' EXP
     CONDITIONAL   → ‘I’ EXP STMT | ‘EF’ EXP | ‘E” EXP 
                   | ‘I’ EXP BLOCK
-    FORLOOP       →  ‘FO’ PARAM BR
+    FORLOOP       →  ‘LF’ PARAM BR
     WHILELOOP     →  ‘W’ EXP
     PRINTSTMT     →  ‘P’ EXP
     RETURNSTMT    →  ‘R’ EXP  
