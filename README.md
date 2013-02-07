@@ -164,19 +164,20 @@ SYNTAX IN PROGRESS
                   |  FORLOOP
                   |  WHILELOOP
                   |  EXP
-    DEC           →  
+    DEC           →  'B' | 'N' | 'C' | 'S' | '[DEC]' | 'Y' | ID | '<>'
     CONSTDEC      →  '_'ID EXP
     FUNDEC        →  ID 'D (' PARAMS ') ->' BLOCK
     PARAMS        →  ID (' 'ID)*
-    ASSIGNMENT    →  (DEC | ID) ‘=’
+    ASSIGNMENT    →  (DEC | ID) ‘=’ ?(DEC)
     PRINTSTMT     →  'P' EXP
     CONDITIONAL   → ‘I’ EXP STMT | ‘EF’ EXP | ‘E” EXP 
                   | ‘I’ EXP BLOCK
     FORLOOP       →  ‘LF’ PARAM BR
-    WHILELOOP     →  ‘W’ EXP
+    WHILELOOP     →  ‘LW’ BOOL
+    UNTILLLOOP    →  'LU' ID
     PRINTSTMT     →  ‘P’ EXP
     RETURNSTMT    →  ‘R’ EXP  
-    BOOL          →  ‘T’ | ‘F’ | 
+    BOOL          →  ‘T’ | ‘F’ | EXP
     ADDOP         →  '+' | '-'
     MULOP         →  '*' | '/' | '%'
     PREFIXOP      →  '-' | '!' | '~' | 'char' | 'int' | 'string' | 'length'
