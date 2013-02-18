@@ -1,9 +1,0 @@
-target
-.classpath
-.project
-.settings
-bin
-
-*.class
-.DS_store
-
