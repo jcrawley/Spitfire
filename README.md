@@ -161,20 +161,19 @@ SYNTAX IN PROGRESS
                   |  ASSIGNMENT
                   |  PRINTSTMT
                   |  CONDITIONAL
-                  |  FORLOOP
-                  |  WHILELOOP
+                  |  LOOP
                   |  EXP
     DEC           →  VARDEC | FUNDEC
     TYPE          →  'B' | 'N' | 'C' | 'S' | 'Y' | ID | '<>' | '[' TYPE ']'
     VARDEC        →  TYPE ID '=' EXP
-    FUNDEC        →  'DF' ID '(' PARAMS ') NEWLINE BLOCK
+    FUNDEC        →  'DF' ID '(' PARAMS ') BR BLOCK
     PARAMS        →  (' 'ID)*
     ASSIGNMENT    →  ID ‘=’ EXP
     PRINTSTMT     →  'P' EXP
     CONDITIONAL   → ‘I’ EXP BLOCK (| ‘EF’ EXP BLOCK)* (| ‘E' EXP BLOCK)?
-    LOOP          →  'LU' EXP NEWLINE BLOCK
-                  →  ‘LF’ ID EXP EXP EXP? NEWLINE BLOCK
-                  →  'LW' EXP NEWLINE BLOCK
+    LOOP          →  'LU' EXP BR BLOCK
+                  →  ‘LF’ ID EXP EXP EXP? BR BLOCK
+                  →  'LW' EXP BR BLOCK
     PRINTSTMT     →  ‘P’ EXP
     RETURNSTMT    →  ‘R’ EXP 
     EXP           →  EXP1 ('||' EXP1)*
@@ -185,12 +184,12 @@ SYNTAX IN PROGRESS
     ADDOP         →  '+' | '-'
     MULOP         →  '*' | '/' | '%'
     PREFIXOP      →  '-' | '!' | '~' | 'char' | 'int' | 'string' | 'length'
-    BLOCK         →  (STMT NEWLINE)+
-    NEWLINE       →  
+    BLOCK         →  (STMT BR)+
 
 
 MICROSYNTAX
-
+    
+    BR            → NEWLINE
     COMMENT       → ‘$’ ()*  NEWLINE
                   | ‘$$’ ()* ‘$$’
     ID            →  '_'?[a-z]+ ([-_a-z0-9])*
