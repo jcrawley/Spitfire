@@ -164,37 +164,35 @@ SYNTAX IN PROGRESS
                   |  FORLOOP
                   |  WHILELOOP
                   |  EXP
-    DEC           →  VARDEC | CONSTDEC | FUNDEC
-    TYPE          →  'B' | 'N' | 'C' | 'S' | 'Y' | ID | '<>'
-    ARRAYDEC      →  '[' TYPE ']' ID '=' EXP
-    CONSTDEC      →  TYPE '_'ID '=' EXP
-    FUNDEC        →  'DF' ID '(' PARAMS ') NEWLINE STMT
+    DEC           →  VARDEC | FUNDEC
+    TYPE          →  'B' | 'N' | 'C' | 'S' | 'Y' | ID | '<>' | '[' TYPE ']'
+    VARDEC        →  TYPE ID '=' EXP
+    FUNDEC        →  'DF' ID '(' PARAMS ') NEWLINE BLOCK
     PARAMS        →  (' 'ID)*
-    ASSIGNMENT    →  DEC | ID ‘=’ (DEC)
+    ASSIGNMENT    →  ID ‘=’ EXP
     PRINTSTMT     →  'P' EXP
-    CONDITIONAL   → ‘I’ EXP STMT | ‘EF’ EXP | ‘E” EXP 
-                  | ‘I’ EXP BLOCK
-    LOOP          →  'LU' RANGE NEWLINE
-                  →  ‘LF’ ID RANGE RANGE ((ADDOP)? RANGE) NEWLINE
-                  →  'LW' EXP NEWLINE
+    CONDITIONAL   → ‘I’ EXP BLOCK (| ‘EF’ EXP BLOCK)* (| ‘E' EXP BLOCK)?
+    LOOP          →  'LU' EXP NEWLINE BLOCK
+                  →  ‘LF’ ID EXP EXP EXP? NEWLINE BLOCK
+                  →  'LW' EXP NEWLINE BLOCK
     PRINTSTMT     →  ‘P’ EXP
     RETURNSTMT    →  ‘R’ EXP 
     EXP           →  EXP1 ('||' EXP1)*
     EXP1          →  EXP2 ('&&' EXP2)*
     EXP2          →  EXP3 (RELOP EXP3)?
-    EXP3          →  EXP4 (
-    RANGE         →  [0-9]+
-    BOOL          →  ‘T’ | ‘F’ | EXP
+    EXP3          →  EXP4 (MULOP EXP4)?
+    BOOL          →  ‘T’ | ‘F’
     ADDOP         →  '+' | '-'
     MULOP         →  '*' | '/' | '%'
     PREFIXOP      →  '-' | '!' | '~' | 'char' | 'int' | 'string' | 'length'
-    BLOCK         →  STMT NEWLINE 'Z'
+    BLOCK         →  (STMT NEWLINE)+
+    NEWLINE       →  
 
 
 MICROSYNTAX
 
     COMMENT       → ‘$’ ()*  NEWLINE
                   | ‘$$’ ()* ‘$$’
-    ID            →  [a-z]+ ([-_a-z0-9])*
+    ID            →  '_'?[a-z]+ ([-_a-z0-9])*
     NUMLIT        →  [0-9]+ ('.' [0-9]*)?
     STRLIT        →  '"'  ( NUMLIT | [a-Z])*  '"'
