@@ -48,13 +48,13 @@ SWAP
                                             
     P x+y                                   console.log(x+y);
 
-BOOLEANS 
+BOOLEANS AND BOOLEAN ARITHMETIC
 
     T					                	true
     F						                false
     5 > 7					                5 > 7
-    x /\ y                                  x && y
-    x \/ y                                  x || y
+    x && y                                  x && y
+    x || y                                  x || y
 
 FUNCTIONS
 
@@ -72,7 +72,9 @@ KEYWORDS
     EI			                			else if 
     DF			                			define function
     DC                                      define class
-    L			                  			loop (e.g. for, while)
+    LU                                      loop until
+    LF                                      for loop
+    LW                                      while loop
     R                                       return
 
 TYPES 
@@ -102,6 +104,7 @@ TYPES OF NUMBERS
                         
     N h = 0x267AC1                          var h = 0x267AC1;
     N o = 0337                              var o = 0337;
+    N n = 135792468                         var n = 135792468;
 
 METHODS
  
@@ -110,9 +113,9 @@ METHODS
     S s = “Hello” 	            			var s = "Hello";
     P s.l			                		console.log(s.length()); // perhaps |s|
 
-STRINGS
+STRINGS AND STRING MANIPULATION
 
-    "Hello”,“world!”.c  	        		s = “Hello” + “world!”; 
+    S s = "Hello” + “world!” 	            var s = “Hello” + “world!”; 
     “Hello, world!" | " "                   “Hello, world!”.split(“ "); // perhaps symbols for split(string) and join(array), | or j
     [“Spit”,”fire"] @ "-"                   [“Spit”, “fire”].join(“”);
     “Spitfire”.l                            "Spitfire".length(); 
@@ -121,27 +124,29 @@ STRINGS
     3.str                                   3 .toString();
 
 LOOPS
+
+Spitfire includes three different types of loops: `LU` is loop until, `LF` is loop for, and `LW` is loop while. `LU` is a simplified `for` loop that will iterate through the code that the user provides `n` amount of times. `LF` works just like any `for` loop. The user would provide an identifier of their choice for initialization, the starting index, the ending index (the condition for each iteration), and an afterthought (which can be positive or negative). Lastly, we have `LW` which will iterate through the body of code that a user provides as long as their given boolean expression is `true`. Below are some examples:
  
     LU 5                                    for (var i = 0; i <5; i++) {
       P i                                       console.log(i);                                          
                                             }
 
-    LF i 2 7 2                              for (var i = 2; i < 7; i +=2) {
+    LF i 2 7 2                              for (var i = 2; i < 7; i += 2) {
       P i*i                                     console.log(i*i);
                                             }
                                         
-    LF i 7 0 -3 				            for (var i = 7; i > 0; i-=3) {
-                    
+    LF i 7 0 -3 				            for (var i = 7; i > 0; i -= 3) {
+      P i^i                                     console.log(i**i);
                                             }
                                             
     LF x a                                  a.forEach(function (x) {console.log(x)});
       P i
 
-    LW x>10                                 while (x>10) {
-      I x<5                                     if (x<5) {
-        x=x-2                                       x = x - 2;
+    LW x > 10                               while (x > 10) {
+      I x < 5                                   if (x < 5) {
+        x = x - 2                                   x = x - 2;
       E                                         } else {
-        x=x-1                                       x = x - 1;
+        x = x - 1                                   x = x - 1;
       P x                                       }
                                                 console.log(x);
                                             }
@@ -149,7 +154,7 @@ LOOPS
 ARRAYS 
 
     [N] p = [100, 43, 22, 5, 8]			    var p = [100, 43, 22, 5, 8];
-    P p[0]					                console.log(p[0]);
+    P p[-1]					                console.log(p[p.length-1]);
     [N] q = p					            var q = p;
     [Y] a = [88, false, “0001”, green]		var a = [88, false, “0001”, green]; 
     P a.length					            console.log(a.length);
