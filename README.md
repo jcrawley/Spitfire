@@ -10,10 +10,10 @@ SPITFIRE ON THE LEFT, JAVASCRIPT ON THE RIGHT
 
 VARIABLE DECLARATIONS
 
-    S s = "spit" 					        var s = "spit"; 
-    S f = "fire" 					        var f = "fire";
+    S s = "spitfire" 					    var s = "spit"; 
     B found = T                             var found = true;
     N hex = 0x34A4                          var hex = 0x34A4;
+    C f = 'f'                               var f = 'f';
 
 PARALLEL DECLARATION
 
@@ -23,6 +23,7 @@ PARALLEL DECLARATION
 CONSTANTS START WITH _, UPPERCASE VARIABLES DECLARATIONS ARE NOT ALLOWED
 
     N _pi = 3.14 				            var pi = 3.14;
+    
 
 ASSIGNMENT IS MOST CERTAINLY NOT INITIALIZATION
 
@@ -36,17 +37,14 @@ ARITHMETIC EXPRESSIONS
 
 SWAP
 
+Spitfire allows its user to swap two variables by using `<=>`. It is demonstrated below. 
+
     N x = 34 					            var x = 34;
     N y = 16 					            var y = 16;
     x <=> y                                 _1 = x;
                                             _2 = y;
                                             x = _2;
                                             y = _1;
-    
-    P x,y                                   console.log(x);
-                                            console.log(y);
-                                            
-    P x+y                                   console.log(x+y);
 
 BOOLEANS AND BOOLEAN ARITHMETIC
 
@@ -84,7 +82,7 @@ TYPES
     S		                				string 
     C			                			character
     []		                				array
-    Y                                       any
+    Y                                       "any" type
     <>			                			null
     
 CLASSES
@@ -99,19 +97,11 @@ CLASSES
     DC polygon
       [point] vertices
       
-
-TYPES OF NUMBERS
+NUMBERS AND THIER TYPES
                         
     N h = 0x267AC1                          var h = 0x267AC1;
     N o = 0337                              var o = 0337;
     N n = 135792468                         var n = 135792468;
-
-METHODS
- 
-    T.ty	               	    			typeof true
- 
-    S s = “Hello” 	            			var s = "Hello";
-    P s.l			                		console.log(s.length()); // perhaps |s|
 
 STRINGS AND STRING MANIPULATION
 
