@@ -151,13 +151,14 @@ Spitfire includes three different types of loops: `LU` is loop until, `LF` is lo
                                                 console.log(x);
                                             }
 
-ARRAYS 
+ARRAYS
+
+Spitfire's arrays are just like any other languages but with some spice. Array declarations are used by having a left hand bracket `[` followed by one of Spitfire's type declarations followed by a right hand bracket `]`. For arrays of multiple types, the user cany use the type `Y` denoting "any" type. To access the last position in an array the user can use the index `-1` just like in Ruby.
 
     [N] p = [100, 43, 22, 5, 8]			    var p = [100, 43, 22, 5, 8];
     P p[-1]					                console.log(p[p.length-1]);
     [N] q = p					            var q = p;
     [Y] a = [88, false, “0001”, green]		var a = [88, false, “0001”, green]; 
-    P a.length					            console.log(a.length);
 
 SYNTAX IN PROGRESS
 
