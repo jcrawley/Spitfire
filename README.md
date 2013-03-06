@@ -1,6 +1,6 @@
 # Spitfire
 
-Spitfire is a language that allows the user to implement solutions as fast as possible using the least amount of keystones. Ain't nobody got time to type out whole words! Spitfire is statically and strongly typed. It is FORTRAN-esque in that all of its keywords are capitalized. One day in class, `jcrawley` said I want to make a language that spits fire. On that fateful day, we knew we had our name.
+Spitfire is a language that allows the user to implement solutions as fast as possible using the least amount of keystones. Ain't nobody got time to type out whole words! Spitfire is statically and strongly typed. It is FORTRAN-esque in that all of its keywords are capitalized. One day in class, `jcrawley` said,  `"I want to make a language that spits fire.` On that fateful day, we knew we had our name.
 
 ### Examples
 
@@ -143,9 +143,11 @@ Spitfire includes three different types of loops: `LU` is loop until, `LF` is lo
 
 ARRAYS
 
-Spitfire's arrays are just like any other languages but with some spice. Array declarations are used by having a left hand bracket `[` followed by one of Spitfire's type declarations followed by a right hand bracket `]`. For arrays of multiple types, the user cany use the type `Y` denoting "any" type. To access the last position in an array the user can use the index `-1` just like in Ruby.
+Spitfire's arrays are just like any other languages but with some spice. Array declarations are used by having a left hand bracket `[` followed by one of Spitfire's type declarations followed by a right hand bracket `]`. For arrays of multiple types, the user cany use the type `Y` denoting "any" type. To access the last position in an array the user can use the index `-1` just like in Ruby. Also, a user can append an element to the end of an array by using `<=`. Some examples are listed below:
 
     [N] p = [100, 43, 22, 5, 8]			    var p = [100, 43, 22, 5, 8];
+    N n = 78                                var n = 78;
+    p <= n                                  p.push(n);
     P p[-1]					                console.log(p[p.length-1]);
     [N] q = p					            var q = p;
     [Y] a = [88, false, “0001”, green]		var a = [88, false, “0001”, green]; 
