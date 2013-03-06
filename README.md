@@ -81,7 +81,7 @@ KEYWORDS
 
 TYPES 
 
-In Spitfire, there are four main types: `B` is for booleans, `N` is for any-type of number (integer and floating point numbers work), `S` is for strings, `C` is for characters, and `<>` for the null type. `[]` is used for array declarations and `Y` is used to denote arrays with multiple types of elements.
+In Spitfire, there are five main types: `B` is for booleans, `N` is for any type of number (integer and floating point numbers work), `S` is for strings, `C` is for characters, and `<>` for the null type. `[]` is used for array declarations and `Y` is used to denote arrays with multiple types of elements.
 
     B			                			boolean 
     N				                		number
