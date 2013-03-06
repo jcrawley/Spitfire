@@ -1,6 +1,6 @@
 # Spitfire
 
-Spitfire is a language that allows the user to implement solutions as fast as possible using the least amount of keystones. Ain't nobody got time to type out whole words! Spitfire is statically and strongly typed. It is FORTRAN-esque in that all of its keywords are capitalized. One day in class, `jcrawley` said,  `"I want to make a language that spits fire.` On that fateful day, we knew we had our name.
+Spitfire is a language that allows the user to implement solutions as fast as possible using the least amount of keystones. Ain't nobody got time to type out whole words! Spitfire is statically and strongly typed. It is FORTRAN-esque in that all of its keywords are capitalized. One day in class, `jcrawley` said,  `"I want to make a language that spits fire."` On that fateful day, we knew we had our name.
 
 ### Examples
 
@@ -20,7 +20,9 @@ PARALLEL DECLARATION
     S s,f = "spit","fire" 				    var s = "spit";
     						                var f = "fire";
 
-CONSTANTS START WITH _, UPPERCASE VARIABLES DECLARATIONS ARE NOT ALLOWED
+CONSTANTS
+
+In Spitfire constants start with `_`. Uppercase identifier names are not allowed.
 
     N _pi = 3.14 				            var pi = 3.14;
     
@@ -37,10 +39,10 @@ ARITHMETIC EXPRESSIONS
 
 SWAP
 
-Spitfire allows its user to swap two variables by using `<=>`. It is demonstrated below. 
+Spitfire allows its user to swap two variables by using `<=>`. It is demonstrated below. The types of the two variables that are being switched do not need to be the same.
 
     N x = 34 					            var x = 34;
-    N y = 16 					            var y = 16;
+    S s = "spitfire" 					    var s = "spitfire";
     x <=> y                                 _1 = x;
                                             _2 = y;
                                             x = _2;
@@ -48,11 +50,13 @@ Spitfire allows its user to swap two variables by using `<=>`. It is demonstrate
 
 BOOLEANS AND BOOLEAN ARITHMETIC
 
+In Spitfire, true and false are denoted by `T` and `F` respectively. 
+
     T					                	true
     F						                false
     5 > 7					                5 > 7
-    x && y                                  x && y
-    x || y                                  x || y
+    T && F                                  x && y
+    T || F                                  x || y
 
 FUNCTIONS
 
@@ -77,13 +81,15 @@ KEYWORDS
 
 TYPES 
 
+In Spitfire, there are four main types: `B` is for booleans, `N` is for any-type of number (integer and floating point numbers work), `S` is for strings, `C` is for characters, and `<>` for the null type. `[]` is used for array declarations and `Y` is used to denote arrays with multiple types of elements.
+
     B			                			boolean 
     N				                		number
     S		                				string 
     C			                			character
+    <>    		                			null
     []		                				array
     Y                                       "any" type
-    <>			                			null
     
 CLASSES
 
