@@ -7,7 +7,7 @@ import java.util.ListIterator;
 import edu.lmu.cs.xlg.util.Log;
 
 /**
- * A Spitfire block.
+ * A Spitfire block. Still work in progress. 
  */
 public class Block extends Entity {
 
