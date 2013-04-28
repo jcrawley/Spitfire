@@ -1,42 +1,41 @@
-package edu.lmu.cs.xlg.iki.entities;
-
-import edu.lmu.cs.xlg.util.Log;
+package edu.lmu.cs.xlg.carlos.entities;
 
 /**
- * An Iki assignment statement.
- */
+* An assignment statement.
+*/
 public class AssignmentStatement extends Statement {
 
-    private VariableReference variableReference;
-    private Expression expression;
+    private VariableExpression left;
+    private Expression right;
 
-    public AssignmentStatement(VariableReference v, Expression e) {
-        this.variableReference = v;
-        this.expression = e;
+    public AssignmentStatement(VariableExpression left, Expression right) {
+        this.left = left;
+        this.right = right;
     }
 
-    public VariableReference getVariableReference() {
-        return variableReference;
+    public VariableExpression getLeft() {
+        return left;
     }
 
-    public Expression getExpression() {
-        return expression;
+    public Expression getRight() {
+        return right;
     }
 
     @Override
-    public void analyze(SymbolTable table, Log log) {
-        variableReference.analyze(table, log);
-        expression.analyze(table, log);
+    public void analyze(AnalysisContext context) {
+        left.analyze(context);
+        right.analyze(context);
+        left.assertWritable(context);
+        right.assertAssignableTo(left.type, "assignment_type_mismatch", context);
     }
 
     @Override
     public Statement optimize() {
-        expression = expression.optimize();
-        if (variableReference.sameVariableAs(expression)) {
+        right = right.optimize();
+        if (left.sameVariableAs(right)) {
             // Assignment to self is a no-op
             return null;
         }
         return this;
     }
-
 }
