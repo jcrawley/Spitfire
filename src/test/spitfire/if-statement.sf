@@ -1,0 +1,10 @@
+$If statement test
+
+N x = 10
+
+I x <= 10
+    P x
+E 
+    P "Not true
+    
+    

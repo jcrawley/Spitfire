@@ -1,0 +1,3 @@
+$really simple string concatenation
+
+S s = "print" + "hello"

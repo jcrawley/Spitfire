@@ -1,0 +1,5 @@
+$checking booleans
+$based on README
+
+S s = T || F ? "spit" : "fire" 
+T && F 

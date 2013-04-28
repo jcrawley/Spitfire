@@ -11,13 +11,13 @@ options {
 
 PARSER_BEGIN(Parser)
 
-package edu.lmu.cs.xlg.manatee.syntax;
+package edu.lmu.cs.xlg.spitfire.syntax;
 
 import java.util.List;
 import java.util.ArrayList;
 import java.io.Reader;
 import edu.lmu.cs.xlg.util.Log;
-import edu.lmu.cs.xlg.manatee.entities.*;
+import edu.lmu.cs.xlg.spitfire.entities.*;
 
 
 public class Parser {
