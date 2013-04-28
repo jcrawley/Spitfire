@@ -1,41 +1,35 @@
-package edu.lmu.cs.xlg.carlos.entities;
+package edu.lmu.cs.xlg.manatee.entities;
+
+import edu.lmu.cs.xlg.util.Log;
 
 /**
-* An assignment statement.
-*/
+ * An assignment statement.
+ */
 public class AssignmentStatement extends Statement {
 
-    private VariableExpression left;
-    private Expression right;
+    private Expression target;
+    private Expression source;
 
-    public AssignmentStatement(VariableExpression left, Expression right) {
-        this.left = left;
-        this.right = right;
+    public AssignmentStatement(Expression target, Expression source) {
+        this.target = target;
+        this.source = source;
     }
 
-    public VariableExpression getLeft() {
-        return left;
+    public Expression getTarget() {
+        return target;
     }
 
-    public Expression getRight() {
-        return right;
-    }
-
-    @Override
-    public void analyze(AnalysisContext context) {
-        left.analyze(context);
-        right.analyze(context);
-        left.assertWritable(context);
-        right.assertAssignableTo(left.type, "assignment_type_mismatch", context);
+    public Expression getSource() {
+        return source;
     }
 
     @Override
-    public Statement optimize() {
-        right = right.optimize();
-        if (left.sameVariableAs(right)) {
-            // Assignment to self is a no-op
-            return null;
+    public void analyze(Log log, SymbolTable table, Subroutine owner, boolean inLoop) {
+        target.analyze(log, table, owner, inLoop);
+        source.analyze(log, table, owner, inLoop);
+        if (!target.isWritableLValue()) {
+            log.error("non.writable.in.assignment.statement");
         }
-        return this;
+        source.assertAssignableTo(target.getType(), log, "assignment.type.mismatch");
     }
 }

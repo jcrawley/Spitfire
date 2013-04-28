@@ -1,4 +1,4 @@
-package edu.lmu.cs.xlg.carlos.entities;
+package edu.lmu.cs.xlg.manatee.entities;
 
 import java.io.PrintWriter;
 import java.lang.reflect.Field;
@@ -6,59 +6,66 @@ import java.lang.reflect.Modifier;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import edu.lmu.cs.xlg.util.Log;
 
 /**
- * Superclass for all entities in the compiler.
+ * A Manatee entity.
  *
- * The front end of the compiler produces an abstract syntax tree which is then decorated
- * (or  transformed) into a semantic graph.  The nodes this structure are called entities.
- * The hierarchy for entities will look something like this:
+ * <p>The front end of the compiler produces an intermediate representation in the form of a graph.
+ * Each entity in the graph has some syntactic and semantic content.  The syntactic content is
+ * filled in by the entity's constructor, and the semantic content is filled in by its
+ * <code>analyze</code> method.  Entities also have an <code>optimize</code> method for
+ * simple local improvements.</p>
  *
+ * <p>The entities are naturally grouped into a hierarchy of classes.  Properties set
+ * during semantic analysis are marked with an asterisk:</p>
+ *
+ * <pre>
  * Entity
- *    Block
- *       Script
- *    Declarable
- *       Variable
- *       Function
- *    Statement
- *       DeclarationStatement
- *       AssignmentStatement
- *       PrintStatement
- *       IfStatement
- *       ReturnStatement
- *       LoopStatement
- *          WhileLoopStatement
- *          UntilLoopStatement
- *          ForLoopStatement
- *    Expression
- *       Literal
- *         NumLiteral
- *         CharLiteral
- *         StrLiteral
- *         BoolLiteral
- *         NullLiteral
- *       VariableReferemce
- *          SimpleVariableReference
- *          ArrayVariableReference
- *       ArrayReference
- *       UnaryExpression
- *       BinaryExpression
- *    Case
- *    Type
- *       Arraytype
- *    Declarable
- *       Function
- *       Variable
- *
- * Each concrete entity class has a constructor to fill in the "syntactic" part of the entity.
- * For example, we know the name of a variable reference while generating the abstract syntax
- * tree, so that is filled in by the constructor.  However, we don't know until semantic analysis
- * exactly which variable is being referred to, so that field is not filled in by the constructor.
+ *     Block (statements, table*)
+ *         Script
+ *     Type
+ *         ArrayType (baseType*)
+ *     Statement
+ *         Declaration (name)
+ *             Variable (typeName, initializer, constant, type*)
+ *             Subroutine (parameters, body)
+ *                 Procedure
+ *                 Function (returnTypeName, returnType*)
+ *         DoNothingStatement
+ *         AssignmentStatement (target, source)
+ *         ReadStatement (expression)
+ *         WriteStatement (expression)
+ *         ExitStatement
+ *         ReturnStatement (expression)
+ *         CallStatement (procedureName, args, procedure*)
+ *         ModifiedStatement (modifier, statement)
+ *         ConditionalStatement (arms, elsePart)
+ *         PlainLoop (body)
+ *         TimesLoop (count, body)
+ *         CollectionLoop (iteratorName, collection, body)
+ *         RangeLoop (iteratorName, low, high, step, body)
+ *         WhileLoop (condition, body)
+ *     Expression (type*)
+ *         Literal (lexeme)
+ *             BooleanLiteral
+ *             CharacterLiteral
+ *             NumberLiteral (value*)
+ *             WholeNumberLiteral (value*)
+ *             StringLiteral
+ *             NullLiteral
+ *         IdentifierExpression (name, referent*)
+ *         UnaryExpression (op, operand)
+ *         BinaryExpression (op, left, right)
+ *         ArrayConstructor (expressions)
+ *         SubscriptExpression (collection, index)
+ *         FunctionCall (function, args)
+ *     ModifiedStatement.Modifier (modifierType, condition)
+ *     ConditionalStatement.Arm (condition, block)
+ * </pre>
  */
 public abstract class Entity {
 
@@ -100,9 +107,8 @@ public abstract class Entity {
     public final void printSyntaxTree(String indent, String prefix, PrintWriter out) {
 
         // Prepare the line to be written
-        String classname = getClass().getName();
-        String kind = classname.substring(classname.lastIndexOf('.') + 1);
-        String line = indent + prefix + "(" + kind + ")";
+        String className = getClass().getName();
+        String line = indent + prefix + className.substring(className.lastIndexOf('.') + 1);
 
         // Process the fields, adding plain attributes to the line, but storing all the entity
         // children in a linked hash map to be processed after the line is written.  We use a
@@ -123,11 +129,11 @@ public abstract class Entity {
                     }
                 } catch (ClassCastException cce) {
                     // Special case for non-entity collections
-                    line += " " + name + "=" + value;
+                    line += " " + name + "=\"" + value + "\"";
                 }
             } else {
                 // Simple attribute, attach description to node name
-                line += " " + name + "=" + value;
+                line += " " + name + "=\"" + value + "\"";
             }
         }
         out.println(line);
@@ -157,9 +163,7 @@ public abstract class Entity {
                 Entity.class.cast(value).traverse(v, visited);
             } else if (value instanceof Iterable<?>) {
                 for (Object child : (Iterable<?>) value) {
-                    if (child instanceof Entity) {
-                        Entity.class.cast(child).traverse(v, visited);
-                    }
+                    Entity.class.cast(child).traverse(v, visited);
                 }
             }
         }
@@ -229,96 +233,16 @@ public abstract class Entity {
     }
 
     /**
-     * Context for semantic analysis.
-     *
-     * Context objects bundle four properties:
-     * <ul>
-     *   <li>A logger to count errors and log messages.
-     *   <li>The symbol table in which all identifiers should be looked up.
-     *   <li>The innermost enclosing function of the entity being analyzed.
-     *   <li>Whether we are in a loop, necessary for checking break statements, for example.
-     * </ul>
-     */
-    public static class AnalysisContext {
-        private Log log;
-        private SymbolTable table;
-        private Function function;
-        private boolean inLoop;
-
-        private AnalysisContext(Log log, SymbolTable table, Function function, boolean inLoop) {
-            this.log = log;
-            this.table = table;
-            this.function = function;
-            this.inLoop = inLoop;
-        }
-
-        public static AnalysisContext makeGlobalContext(Log log) {
-            AnalysisContext context = new AnalysisContext(log, null, null, false);
-            SymbolTable global = new SymbolTable(null);
-            global.insert(Type.INT, context.getLog());
-            global.insert(Type.REAL, context.getLog());
-            global.insert(Type.BOOLEAN, context.getLog());
-            global.insert(Type.CHAR, context.getLog());
-            global.insert(Type.STRING, context.getLog());
-            global.insert(Function.GET_STRING, context.getLog());
-            global.insert(Function.SUBSTRING, context.getLog());
-            global.insert(Function.SQRT, context.getLog());
-            global.insert(Function.PI, context.getLog());
-            global.insert(Function.SIN, context.getLog());
-            global.insert(Function.COS, context.getLog());
-            global.insert(Function.ATAN, context.getLog());
-            global.insert(Function.LN, context.getLog());
-            return context.withTable(global);
-        }
-
-        public AnalysisContext withTable(SymbolTable table) {
-            return new AnalysisContext(this.log, table, this.function, this.inLoop);
-        }
-
-        public AnalysisContext withFunction(Function function) {
-            return new AnalysisContext(this.log, this.table, function, this.inLoop);
-        }
-
-        public AnalysisContext withInLoop(boolean inLoop) {
-            return new AnalysisContext(this.log, this.table, this.function, inLoop);
-        }
-
-        public Log getLog() {
-            return log;
-        }
-
-        public SymbolTable getTable() {
-            return table;
-        }
-
-        public Function getFunction() {
-            return function;
-        }
-
-        public boolean isInLoop() {
-            return inLoop;
-        }
-
-        public Type lookupType(String name) {
-            return getTable().lookupType(name, getLog());
-        }
-
-        public Variable lookupVariable(String name) {
-            return getTable().lookupVariable(name, getLog());
-        }
-
-        public Function lookupFunction(String name, List<Expression> args) {
-            return getTable().lookupFunction(name, args, getLog());
-        }
-
-        public void error(String errorKey, Object... arguments) {
-            log.error(errorKey, arguments);
-        }
-    }
-
-    /**
      * Performs semantic analysis on this entity, and (necessarily) on its descendants.
+     * @param log
+     *            the destination for info and error messages
+     * @param table
+     *            the current symbol table in which we are to analyze this entity
+     * @param owner
+     *            the innermost enclosing procedure or function, used to analyze return statements
+     * @param inLoop
+     *            whether this analysis is taking place within a loop, needed in order to analyze
+     *            exit statements.
      */
-    public abstract void analyze(AnalysisContext context);
+    public abstract void analyze(Log log, SymbolTable table, Subroutine owner, boolean inLoop);
 }
-
