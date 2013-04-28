@@ -1,5 +1,9 @@
-$Edited By Jonathan Piatos
-$As of 4/12/2013
-$Checking if I can print anything here
+$Checking if I can comment as I please here
+$single-line comment 
+$test here
 
-p "Good Luck!"
+$$
+Multiple comments
+going troll this block
+ROFL
+$$

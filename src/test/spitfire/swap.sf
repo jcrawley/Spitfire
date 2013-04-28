@@ -1,0 +1,5 @@
+$swapping variables
+
+N x = 34                                    
+S s = "spitfire"                            
+x <=> y                                    
