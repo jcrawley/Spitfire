@@ -51,6 +51,9 @@ import edu.lmu.cs.xlg.util.Log;
  *    Case
  *    Type
  *       Arraytype
+ *    Declarable
+ *       Function
+ *       Variable
  *
  * Each concrete entity class has a constructor to fill in the "syntactic" part of the entity.
  * For example, we know the name of a variable reference while generating the abstract syntax
