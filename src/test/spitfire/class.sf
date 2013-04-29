@@ -1,0 +1,18 @@
+$creating a basic class in spitfire
+$based on description in the README.md
+
+DC point 
+   N x
+   N y
+   S color
+
+   point a = point(4, 5, "purple")
+   point b = point(-3, 0, "red")
+   point c = point(12, -9, "orange)
+
+   [point] myPoints = [a, b, c]
+
+DC polygon
+  [point] vertices
+
+polygon triangle = polygon(myPoints)
