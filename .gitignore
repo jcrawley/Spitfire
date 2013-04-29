@@ -6,4 +6,4 @@ bin
 
 *.class
 .DS_store
-
+.metadata
