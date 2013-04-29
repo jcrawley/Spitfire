@@ -1,6 +1,6 @@
-package edu.lmu.cs.xlg.manatee.entities;
+package com.josephcrawley.Spitfire.entities;
 
-import edu.lmu.cs.xlg.util.Log;
+import com.josephcrawley.Spitfire.entities;
 
 /**
  * A number literal, like "2.3", "4.6634E-231", etc.

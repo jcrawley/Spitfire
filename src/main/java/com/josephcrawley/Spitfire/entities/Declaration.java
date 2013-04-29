@@ -1,4 +1,4 @@
-package edu.lmu.cs.xlg.manatee.entities;
+package com.josephcrawley.Spitfire.entities;
 
 /**
  * A statement that declares an entity, such as a variable, procedure, function, or type.

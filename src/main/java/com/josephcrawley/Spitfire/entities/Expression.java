@@ -1,6 +1,6 @@
-package edu.lmu.cs.xlg.manatee.entities;
+package com.josephcrawley.Spitfire.entities;
 
-import edu.lmu.cs.xlg.util.Log;
+import com.josephcrawley.Spitfire.entities;
 
 /**
  * An expression.

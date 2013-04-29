@@ -1,4 +1,4 @@
-package edu.lmu.cs.xlg.manatee.entities;
+package com.josephcrawley.Spitfire.entities;
 
 import java.util.HashMap;
 import java.util.HashSet;
