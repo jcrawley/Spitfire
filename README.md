@@ -208,7 +208,7 @@ SYNTAX IN PROGRESS
     BOOL          →  ‘T’ | ‘F’
     ADDOP         →  '+' | '-'
     MULOP         →  '*' | '/' | '%'
-    PREFIXOP      →  '-' | '!' | '~' | 'char' | 'int' | 'string' | 'length'
+    PREFIXOP      →  '-' | '!' 
     BLOCK         →  (STMT BR)+
     ARGS          →  '('EXP (EXP ',')* ')' | '()' 
 
