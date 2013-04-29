@@ -36,7 +36,7 @@ public class NumberLiteral extends Literal {
             }
             value = Double.valueOf(lexeme);
         } catch (NumberFormatException e) {
-            log.error("bad_number", getLexeme());
+            log.error("non_integer", getLexeme());
         }
     }
 }
