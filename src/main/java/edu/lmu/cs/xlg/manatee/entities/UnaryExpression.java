@@ -36,13 +36,17 @@ public class UnaryExpression extends Expression {
     public void analyze(Log log, SymbolTable table, Subroutine owner, boolean inLoop) {
         operand.analyze(log, table, owner, inLoop);
 
-        if ("!".equals(op)) {
+        if ("not".equals(op)) {
             operand.assertBoolean(op, log);
             type = Type.BOOLEAN;
 
         } else if ("-".equals(op)) {
             operand.assertArithmetic(op, log);
             type = operand.getType();
+
+        } else if ("length".equals(op)) {
+            operand.assertArrayOrString(op, log);
+            type = Type.BOOLEAN;
 
         } else {
             throw new RuntimeException("Internal error in unary expression analysis");
