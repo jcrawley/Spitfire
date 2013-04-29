@@ -79,13 +79,13 @@ public class BinaryExpression extends Expression {
         } else if (op.matches("=|!=")) {
             if (!(left.type.isPrimitive() &&
                     (left.isCompatibleWith(right.type) || right.isCompatibleWith(left.type)))) {
-                log.error("eq.type.error", op, left.type, right.type);
+                log.error("incompatible_types", op, left.type, right.type);
             }
             type = Type.BOOLEAN;
 
         // bool and bool
         // bool or bool
-        } else if (op.matches("and|or")) {
+        } else if (op.matches("&&|s\|\|")) {
             left.assertBoolean(op, log);
             right.assertBoolean(op, log);
             type = Type.BOOLEAN;
@@ -104,7 +104,7 @@ public class BinaryExpression extends Expression {
 
         // ref is ref
         // ref is not ref
-        } else if (op.matches("is") || op.matches("is not")) {
+        } else if (op.matches("=") || op.matches("!=")) {
             if (!left.getType().isReference() && !right.getType().isReference()) {
                 log.error("non.reference", op);
             }
