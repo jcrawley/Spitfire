@@ -1,0 +1,24 @@
+$Jonathan Piatos
+$Checking Loops and If-statements
+$As of 4/12/2013
+
+L
+    P "testing"
+
+L 5
+    P i
+
+LF i 1 100 1
+    S fb = i % 3 == 0 ? "Fizz" : ""
+    fb += i & 5 == 0 ? "Buzz" : ""
+    P fb
+
+LF x a
+    P i
+
+LW x > 10
+    I x < 5
+        x = x -2 
+    E 
+        x = x -1
+    P x

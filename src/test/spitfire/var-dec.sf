@@ -1,0 +1,9 @@
+$Edited by Jonathan Piatos
+$As of 4/12/2013
+$Simple tesing of Variable declarations
+
+S s = "Spitfire"
+B found = T
+N hex = 0x34A4
+C f = 'f'
+
