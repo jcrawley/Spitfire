@@ -1,6 +1,6 @@
 package com.josephcrawley.Spitfire.entities;
 
-import edu.lmu.cs.xlg.util.Log;
+import com.josephcrawley.util.Log;
 
 /**
  * A loop that takes an iterator from one value to another by some step value.

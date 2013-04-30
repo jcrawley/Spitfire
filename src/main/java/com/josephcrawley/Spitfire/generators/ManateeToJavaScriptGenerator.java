@@ -1,8 +1,8 @@
-package edu.lmu.cs.xlg.manatee.generators;
+package com.josephcrawley.Spitfire.generators;
 
 import java.io.PrintWriter;
 
-import edu.lmu.cs.xlg.manatee.entities.Script;
+import com.josephcrawley.Spitfire.entities.Script;
 
 /**
  * A generator that translates an Manatee program into JavaScript.

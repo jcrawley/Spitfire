@@ -1,0 +1,547 @@
+/*
+ *  spitfire.jj
+ *
+ *  A JavaCC specification for Spitfire.
+ */
+
+options {
+    UNICODE_INPUT = true;
+    STATIC = false;
+}
+
+PARSER_BEGIN(Parser)
+
+package edu.lmu.cs.xlg.manatee.syntax;
+
+import java.util.List;
+import java.util.ArrayList;
+import java.io.Reader;
+import com.josephcrawley.util.Log;
+import com.josephcrawley.Spitfire.entities.*;
+
+
+public class Parser {
+    public Script parse(Reader reader, Log log) {
+        try {
+            return SCRIPT();
+        } catch (TokenMgrError e) {
+            log.exception(e);
+            return null;
+        } catch (ParseException e) {
+            log.exception(e);
+            return null;
+        }
+    }
+}
+
+PARSER_END(Parser)
+
+SKIP: {
+    " " | "\t" | <"--" (~["\n","\r"])*>
+}
+
+// Reserved Words and symbols
+
+TOKEN: {
+    "I" | "EI" | "E" | "DF" | "DC" | "L" | "R" | "B"
+    | "N" | "S" | "C" | "Y" | "< >" | "T" | "F" | "P" | "LU" | "LF"
+    | "LW"| ":" | "," | "+" | "-" | "*" | "/" | "==" | "^" | "|" | "@" | "::"
+    | "<" | "<=" | "=" | ">=" | ">" | "(" | ")" | "[" | "]" | "$"
+|
+    < BR: "\n" | "\r" | "\r\n" >
+|
+    < NUMLIT: (["0"-"9"])+ "." (["0"-"9"])* (<EXPONENT>)? >
+|
+    < #EXPONENT: ("x"|"") "10^" ("-")? (["0"-"9"])+ >
+|
+    < CHARLIT:
+        "'"
+        (
+            ~["'", "\\" ,"\u0000"-"\u001f", "\u007f"-"\u009f"]
+        |
+            "\\" ["n", "t", "\"", "\'", "\\"]
+        )
+        "'"
+    >
+|
+    < STRLIT:
+        "\""
+        (
+            ~["\"", "\\" ,"\u0000"-"\u001f", "\u007f"-"\u009f"]
+        |
+            "\\" ["n", "t", "\"", "\'", "\\"]
+        )*
+        "\""
+    >
+|
+    < ID: <LETTER> (<LETTER>|<DIGIT>|"_")* >
+|
+    < #LETTER: [
+        "\u0061"-"\u007a"
+    ] >
+|
+    < #DIGIT: [
+        "\u0030"-"\u0039", "\u0660"-"\u0669", "\u06f0"-"\u06f9", "\u0966"-"\u096f", "\u09e6"-"\u09ef",
+        "\u0a66"-"\u0a6f", "\u0ae6"-"\u0aef", "\u0b66"-"\u0b6f", "\u0be7"-"\u0bef", "\u0c66"-"\u0c6f",
+        "\u0ce6"-"\u0cef", "\u0d66"-"\u0d6f", "\u0e50"-"\u0e59", "\u0ed0"-"\u0ed9", "\u0f20"-"\u0f29",
+        "\u1040"-"\u1049", "\u1369"-"\u1371", "\u17e0"-"\u17e9", "\u1810"-"\u1819", "\u1946"-"\u194f",
+        "\uff10"-"\uff19"
+    ] >
+}
+
+// --------------------
+// SCRIPT -> (STMT BR)+
+// --------------------
+
+Script SCRIPT(): {
+    List<Statement> statements = new ArrayList<Statement>();
+    Statement s;
+}{
+
+    (s = STMT() {statements.add(s);} <BR>)+
+    <EOF>
+    {return new Script(statements);}
+}
+
+List<Expression> ARGS():
+{
+  List<Expression> arguments = new ArrayList<Expression>();
+  Expression e;
+  Expression e1;
+}{
+    (
+        LOOKAHEAD(2) "(" ")"
+    |
+        "("
+            e = EXP() {arguments.add(e);}
+            ("," e = EXP() {arguments.add(e);})*
+        ")"
+    )
+    {return arguments;}
+}
+
+// ---------------------------------------------------------------------
+// STMT -> 	    |  DEC
+//              |  ASSIGNMENT
+//              |  PRINTSTMT
+//              |  CONDITIONAL
+//              |  LOOP
+//              |  EXP
+//              |  RETURNSTMT
+// ---------------------------------------------------------------------
+
+Statement STMT(): {
+    Statement s;
+}{
+    (
+        LOOKAHEAD(3) s = DEC()
+    |
+        LOOKAHEAD(2) s = ASSIGNMENT()
+    |
+        s = PRINTSTMT()
+    |
+        s = CONDITIONAL()
+    |
+        s = LOOP()
+    |
+        s = RETURNSTMT()
+    )
+    {return s;}
+}
+
+//-------------------------
+// ASSIGNMENT -> ID '=' EXP
+//-------------------------
+
+AssignmentStatement ASSIGNMENT():
+{
+    Token t;
+    Expression source;
+}{
+    t = <ID> "=" source = EXP()
+    {
+      return new AssignmentStatement(new IdentifierExpression(t.image), source);
+    }
+}
+
+//---------------------
+// PRINTSTMT -> 'P' EXP
+//---------------------
+
+PrintStatement PRINTSTMT():
+{
+   Expression e;
+}{
+    ("P" e = EXP()) {return new PrintStatement(e);}
+}
+
+ReturnStatement RETURNSTMT():
+{
+    Expression e;
+}{
+    ("R" e = EXP()) {return new ReturnStatement(e);}
+}
+
+// -----------------------
+// DEC -> VARDEC | FUNCDEC
+// -----------------------
+
+Statement DEC(): {
+    Statement s;
+}{
+    (
+        s = VARDEC()
+    |
+        s = FUNDEC()
+    )
+    {return s;}
+}
+
+// -------------------------
+// VARDEC -> TYPE ID '=' EXP
+// -------------------------
+
+Variable VARDEC(): {
+    Type t = null;
+    Token v = null;
+    Expression e = null;
+}{
+    t = TYPE() v = <ID> "=" e = EXP()
+    {return new Variable(v.image, t, e);}
+}
+
+// --------------------------------------------------------------
+// TYPE -> 'B' | 'N' | 'C' | 'S' | 'Y' | ID | '<>' | '[' TYPE ']'
+// --------------------------------------------------------------
+
+Type TYPE(): {
+    Token t;
+    Type type;
+}{
+    (
+        "B" {return Type.BOOLEAN;}
+    |
+        "C" {return Type.CHARACTER;}
+    |
+        "S" {return Type.STRING;}
+    |
+        "Y" {return Type.ANY;}
+    |
+        "N" {return Type.NUMBER;}
+    |
+        t = <ID> {return new NamedType(t.image);}
+    |
+        "<>" {return Type.NULL_TYPE;}
+    |
+        "[" type = TYPE() "]" {return new ArrayType(type);}
+    )
+}
+
+// ---------------------------------
+// FUNDEC -> 'DF' ID PARAMS BR BLOCK
+// ---------------------------------
+
+Function FUNDEC(): {
+    Type type;
+    Token name;
+    List<Variable> params = new ArrayList<Variable>();
+    Block body;
+}{
+    "DF" type = TYPE() name = <ID> (PARAMS(params))? body = BLOCK()
+    {return new Function(type, name.image, params, body);}
+}
+
+// --------------------------------------------------
+// PARAMS -> '(' ')' | '(' TYPE ID (',' TYPE ID)* ')'
+// --------------------------------------------------
+
+void PARAMS(List<Variable> params): {
+    Type t;
+    Token p;
+}{
+    (
+        LOOKAHEAD(2) "(" ")"
+    |
+        "("
+            t = TYPE() p = <ID> {params.add(new Variable(p.image, t, null));}
+            ("," t = TYPE() p = <ID> {params.add(new Variable(p.image, t, null));})*
+        ")"
+    )
+}
+
+// ----------------------
+// BLOCK -> (BR STMT)+
+// ----------------------
+
+Block BLOCK(): {
+    List<Statement> statements = new ArrayList<Statement>();
+    Statement s;
+}{
+    ":" (<BR>)+ (LOOKAHEAD(2) s = STMT() {statements.add(s);} )+
+    {return new Block(statements);}
+}
+
+// -----------------------------------------------------------
+// CONDITIONAL -> 'I' EXP BLOCK ('EI' EXP BLOCK)* ('E' BLOCK)?
+// -----------------------------------------------------------
+
+Statement CONDITIONAL(): {
+    ConditionalStatement.Arm arm;
+    List<ConditionalStatement.Arm> arms = new ArrayList<ConditionalStatement.Arm>();
+    Expression e;
+    Block b;
+    Block elseBlock = null;
+}{
+    "I" e = EXP() b = BLOCK()
+    {arms.add(new ConditionalStatement.Arm(e, b));}
+    (
+        LOOKAHEAD(2)"|" "EI" e = EXP() b = BLOCK()
+        {arms.add(new ConditionalStatement.Arm(e, b));}
+    )*
+    (
+       LOOKAHEAD(2) "E" elseBlock = BLOCK()
+    )?
+    //"end"
+    {return new ConditionalStatement(arms, elseBlock);}
+}
+
+// -----------------------------------------------------
+// LOOP ->  	| 'LU' EXP BR BLOCK
+//       		| 'LF' ID EXP EXP EXP? BR BLOCK
+//              | 'LW' EXP BR BLOCK
+// -----------------------------------------------------
+//needs more work
+
+Statement LOOP(): {
+    Token t = null;
+    Expression e = null;
+    Expression e2 = null;
+    Expression e3 = null;
+    Block b;
+}{
+    (
+        "LU" (e = EXP()) <BR> b = BLOCK()
+        {return e == null ? new PlainLoop(b) : new TimesLoop(e, b);}
+    |
+        "LW" e = EXP() b = BLOCK()
+        {return new WhileLoop(e, b);}
+    |
+        "LF" t = <ID> e = EXP() e2 = EXP() (e3 = EXP())? <BR> BLOCK()//???
+        b = BLOCK()
+        {
+            if (e3 == null) {
+                return new CollectionLoop(t.image, e, b); //looping through objects
+            } else {
+                return new RangeLoop(t.image, e, e2, e3, b); //regular for loop
+            }
+        }
+    )
+}
+
+// ------------------------
+// EXP -> EXP1 ('||' EXP1)*
+// ------------------------
+
+Expression EXP(): {
+    Expression e1;
+    Expression e2;
+}{
+    e1 = EXP1()
+    (
+        "||"
+        e2 = EXP1()
+        {e1 = new BinaryExpression(e1, "||", e2);}
+    )*
+    {return e1;}
+}
+
+// -------------------------
+// EXP1 -> EXP2 ('&&' EXP2)*
+// -------------------------
+
+Expression EXP1(): {
+    Expression e1;
+    Expression e2;
+}{
+    e1 = EXP2()
+    (
+        "&&"
+        e2 = EXP2()
+        {e1 = new BinaryExpression(e1, "&&", e2);}
+    )*
+    {return e1;}
+}
+
+// --------------------------
+// EXP2 -> EXP3 (RELOP EXP3)?
+// --------------------------
+
+Expression EXP2(): {
+    String op;
+    Expression e1;
+    Expression e2;
+}{
+    e1 = EXP3()
+    (
+        op = RELOP()
+        e2 = EXP3()
+        {e1 = new BinaryExpression(e1, op, e2);}
+    )*
+    {return e1;}
+}
+
+// --------------------------
+// EXP3 -> EXP4 (ADDOP EXP4)*
+// --------------------------
+
+Expression EXP3(): {
+    String op;
+    Expression e1, e2;
+}{
+    e1 = EXP4()
+    (
+        op = ADDOP()
+        e2 = EXP4()
+        {e1 = new BinaryExpression(e1, op, e2);}
+    )*
+    {return e1;}
+}
+
+// --------------------------
+// EXP4 -> EXP5 (MULOP EXP5)*
+// --------------------------
+
+Expression EXP4(): {
+    String op;
+    Expression e1, e2;
+}{
+    e1 = EXP5()
+    (
+        op = MULOP()
+        e2 = EXP5()
+        {e1 = new BinaryExpression(e1, op, e2);}
+    )*
+    {return e1;}
+}
+
+// ----------------------
+// EXP5 -> PREFIXOP? EXP6
+// ----------------------
+
+Expression EXP5(): {
+    String op = null;
+    Expression e;
+}{
+    (op = PREFIXOP())? e = EXP6()
+    {return op == null ? e : new UnaryExpression(op, e);}
+}
+
+// -----------------------------------------------
+// EXP6 -> EXP7 ('::' TYPE | '@' EXP7 | '|' EXP7)?
+// -----------------------------------------------
+
+Expression EXP6(): {
+    Expression e1, e2;
+    Type t;
+}{
+    e1 = EXP7()
+    (
+        "::" t = TYPE() {e1 = new CastExpression(e1, t);}
+    |
+        "@" e2 = EXP7() {e1 = new BinaryExpression(e1, "@", e2);}
+    |
+        "|" e2 = EXP7() {e1 = new BinaryExpression(e1, "|", e2);}
+    )?
+    {return e1;}
+}
+
+// -----------------------------------------------------------------
+// EXP7 -> 'T' | 'F' | NUMLIT | CHARLIT | STRLIT | VAR | '(' EXP ')'
+// -----------------------------------------------------------------
+
+Expression EXP7(): {
+    VariableExpression v;
+    Expression e = null;
+    Token t;
+}{
+    "<>" {return NullLiteral.INSTANCE;}
+|
+    "T" {return BooleanLiteral.TRUE;}
+|
+    "F" {return BooleanLiteral.FALSE;}
+|
+    t = <NUMLIT> {return new NumberLiteral(t.image);}
+|
+    t = <CHARLIT> {return new CharacterLiteral(t.image);}
+|
+    t = <STRLIT> {return new StringLiteral(t.image);}
+|
+    v = VAREXP() {return v;}
+|
+    "(" e = EXP() ")" {return e;}
+}
+
+// -------------------------------------------
+// VAREXP -> ID ('[' EXP ']' | '.' ID | ARGS)*
+// -------------------------------------------
+
+VariableExpression VAREXP(): {
+    VariableExpression v;
+    Token t;
+    Expression e;
+    List<Expression> args;
+}{
+    t = <ID> {v = new IdentifierExpression(t.image);}
+    (
+        "[" e = EXP() "]" {v = new SubscriptExpression(v, e);}
+    |
+        "." t = <ID> {v = new DotExpression(v, t.image);}
+    |
+        args = ARGS() {v = new FunctionCall(v, args);}
+    )*
+    {return v;}
+}
+
+// ----------------------------------------------
+// RELOP -> '<' | '<=' | '==' | '!=' | '>=' | '>'
+// ----------------------------------------------
+
+String RELOP(): {
+    Token t;
+}{
+    (t = "<" | t = "<=" | t = "==" | t = "!=" | t = ">=" | t = ">")
+    {return t.image;}
+}
+
+// ------------------
+// ADDOP -> '+' | '-'
+// ------------------
+
+String ADDOP(): {
+    Token t;
+}{
+    (t = "+" | t = "-")
+    {return t.image;}
+}
+
+// -------------------------------------
+// MULOP -> '*' | '/' | '%' | '^' | '**'
+// -------------------------------------
+
+String MULOP(): {
+    Token t;
+}{
+    (t = "*" | t = "/" | t = "%" | t = "^" | t = "**")
+    {return t.image;}
+}
+
+// ---------------------------
+// PREFIXOP -> '-' | "!" | "~"
+// ---------------------------
+
+String PREFIXOP(): {
+    Token t;
+}{
+    (t = "-" | t = "!" | t= "~")
+    {return t.image;}
+}

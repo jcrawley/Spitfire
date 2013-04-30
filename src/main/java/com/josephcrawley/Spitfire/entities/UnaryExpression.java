@@ -1,6 +1,6 @@
 package com.josephcrawley.Spitfire.entities;
 
-import edu.lmu.cs.xlg.util.Log;
+import com.josephcrawley.util.Log;
 
 /**
  * An expression made up of an operator and a single operand.
