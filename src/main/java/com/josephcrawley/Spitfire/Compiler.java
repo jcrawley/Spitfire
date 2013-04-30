@@ -8,7 +8,11 @@ import java.io.Reader;
 import com.josephcrawley.Spitfire.entities.Script;
 import com.josephcrawley.Spitfire.entities.SymbolTable;
 import com.josephcrawley.Spitfire.generators.Generator;
+<<<<<<< HEAD
 import com.josephcrawley.Spitfire.syntax.Parser;
+=======
+//import edu.lmu.cs.xlg.manatee.syntax.Parser;
+>>>>>>> f5a03358a90067e167443cc3e1262b69cba4011e
 import com.josephcrawley.util.Log;
 
 /**

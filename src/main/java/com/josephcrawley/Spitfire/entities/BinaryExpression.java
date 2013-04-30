@@ -1,4 +1,8 @@
 package com.josephcrawley.Spitfire.entities;
+<<<<<<< HEAD
+=======
+import com.josephcrawley.util.Log;
+>>>>>>> f5a03358a90067e167443cc3e1262b69cba4011e
 
 import com.josephcrawley.util.Log;
 
