@@ -46,7 +46,7 @@ TOKEN: {
     "I" | "EI" | "E" | "DF" | "DC" | "L" | "R" | "B"
     | "N" | "S" | "C" | "Y" | "< >" | "T" | "F" | "P" | "LU" | "LF"
     | "LW"| ":" | "," | "+" | "-" | "*" | "/" | "==" | "^" | "|" | "@" | "::"
-    | "<" | "<=" | "=" | ">=" | ">" | "(" | ")" | "[" | "]" | "$"
+    | "<" | "<=" | "=" | ">=" | ">" | "(" | ")" | "[" | "]" | "{" | "}" | "$"
 |
     < BR: "\n" | "\r" | "\r\n" >
 |
@@ -98,7 +98,7 @@ Script SCRIPT(): {
     Statement s;
 }{
 
-    (s = STMT() {statements.add(s);} <BR>)+
+    (s = STMT() {statements.add(s);} (<BR>)+)+
     <EOF>
     {return new Script(statements);}
 }
@@ -277,7 +277,7 @@ Block BLOCK(): {
     List<Statement> statements = new ArrayList<Statement>();
     Statement s;
 }{
-    ":" (<BR>)+ (LOOKAHEAD(2) s = STMT() {statements.add(s);} )+
+    "{"  (<BR>)*  (s = STMT() {statements.add(s);} (<BR>)+)+ "}"
     {return new Block(statements);}
 }
 
@@ -320,14 +320,13 @@ Statement LOOP(): {
     Block b;
 }{
     (
-        "LU" (e = EXP()) <BR> b = BLOCK()
+        "LU" (e = EXP()) b = BLOCK()
         {return e == null ? new PlainLoop(b) : new TimesLoop(e, b);}
     |
         "LW" e = EXP() b = BLOCK()
         {return new WhileLoop(e, b);}
     |
-        "LF" t = <ID> e = EXP() e2 = EXP() (e3 = EXP())? <BR> BLOCK()//???
-        b = BLOCK()
+        "LF" t = <ID> e = EXP() ":" e2 = EXP() (":" e3 = EXP())? b = BLOCK()
         {
             if (e3 == null) {
                 return new CollectionLoop(t.image, e, b); //looping through objects
@@ -386,7 +385,7 @@ Expression EXP2(): {
         op = RELOP()
         e2 = EXP3()
         {e1 = new BinaryExpression(e1, op, e2);}
-    )*
+    )?
     {return e1;}
 }
 
