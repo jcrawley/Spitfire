@@ -37,7 +37,7 @@ public class Parser {
 PARSER_END(Parser)
 
 SKIP: {
-    " " | "\t" | <"--" (~["\n","\r"])*>
+    " " | "\t" | <"$" (~["\n","\r"])*>
 }
 
 // Reserved Words and symbols
@@ -98,7 +98,7 @@ Script SCRIPT(): {
     Statement s;
 }{
 
-    (s = STMT() {statements.add(s);} (<BR>)+)+
+    (<BR>)* (s = STMT() {statements.add(s);} (<BR>)+)+
     <EOF>
     {return new Script(statements);}
 }
