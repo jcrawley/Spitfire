@@ -11,7 +11,7 @@ options {
 
 PARSER_BEGIN(Parser)
 
-package edu.lmu.cs.xlg.manatee.syntax;
+package com.josephcrawley.Spitfire.syntax;
 
 import java.util.List;
 import java.util.ArrayList;

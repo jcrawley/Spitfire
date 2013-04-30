@@ -4,7 +4,7 @@ target
 .settings
 .metadata
 bin
-
+dependency-reduced-pom.xml
 *.class
 .DS_store
 
