@@ -17,7 +17,6 @@ import com.josephcrawley.Spitfire.entities.NullLiteral;
 import com.josephcrawley.Spitfire.entities.NumberLiteral;
 import com.josephcrawley.Spitfire.entities.StringLiteral;
 import com.josephcrawley.Spitfire.entities.Type;
-import com.josephcrawley.Spitfire.WholeNumberLiteral;
 import com.josephcrawley.util.Log;
 
 /**
@@ -25,13 +24,11 @@ import com.josephcrawley.util.Log;
  */
 public class TypeAnalysisTest {
 
-    private Log log = new Log("Manatee", new PrintWriter(System.out, true));
+    private Log log = new Log("Spitfire", new PrintWriter(System.out, true));
 
     Expression nullLiteral = NullLiteral.INSTANCE;
     Expression no = BooleanLiteral.FALSE;
     Expression yes = BooleanLiteral.TRUE;
-    Expression seven = new WholeNumberLiteral("7");
-    Expression eight = new WholeNumberLiteral("8");
     Expression half = new NumberLiteral("0.5");
     Expression dollar = new CharacterLiteral("'$'");
     Expression dog = new StringLiteral("\"dog\"");
@@ -39,7 +36,6 @@ public class TypeAnalysisTest {
     Expression emptyArray = new ArrayConstructor(new ArrayList<Expression>());
     Expression arrayOfOneNull = new ArrayConstructor(Arrays.asList(nullLiteral));
     Expression arrayOfTwoNulls = new ArrayConstructor(Arrays.asList(nullLiteral, nullLiteral));
-    Expression arrayOfOneSeven = new ArrayConstructor(Arrays.asList(seven));
 
     private void check(Expression e, Type t) {
         e.analyze(log, null, null, false);
@@ -52,11 +48,8 @@ public class TypeAnalysisTest {
 
     @Test
     public void testSimpleExpressions() {
-        check(new WholeNumberLiteral("8"), Type.WHOLE_NUMBER);
         check(new CharacterLiteral("'Z'"), Type.CHARACTER);
         check(new StringLiteral("\"Zyxwvut\""), Type.STRING);
-        check(BooleanLiteral.FALSE, Type.TRUTH_VALUE);
-        check(BooleanLiteral.TRUE, Type.TRUTH_VALUE);
     }
 
     @Test
@@ -67,40 +60,22 @@ public class TypeAnalysisTest {
     @Test
     public void testSingletonArrayExpressions() {
         checkArray(Arrays.asList(nullLiteral), Type.NULL_TYPE.array());
-        checkArray(Arrays.asList(no), Type.TRUTH_VALUE.array());
-        checkArray(Arrays.asList(seven), Type.WHOLE_NUMBER.array());
         checkArray(Arrays.asList(half), Type.NUMBER.array());
         checkArray(Arrays.asList(dollar), Type.CHARACTER.array());
         checkArray(Arrays.asList(dog), Type.STRING.array());
         checkArray(Arrays.asList(emptyArray), Type.ARBITRARY_ARRAY.array());
         check(arrayOfOneNull, Type.NULL_TYPE.array());
-        check(arrayOfOneSeven, Type.WHOLE_NUMBER.array());
         checkArray(Arrays.asList(arrayOfOneNull), Type.NULL_TYPE.array().array());
-        checkArray(Arrays.asList(arrayOfOneSeven), Type.WHOLE_NUMBER.array().array());
     }
 
     @Test
     public void testHomogeneousArrayExpressions() {
         checkArray(Arrays.asList(nullLiteral, nullLiteral), Type.NULL_TYPE.array());
-        checkArray(Arrays.asList(no, no, yes), Type.TRUTH_VALUE.array());
-        checkArray(Arrays.asList(seven, eight), Type.WHOLE_NUMBER.array());
         checkArray(Arrays.asList(half, half), Type.NUMBER.array());
         checkArray(Arrays.asList(dollar, dollar), Type.CHARACTER.array());
         checkArray(Arrays.asList(dog, dog, rat), Type.STRING.array());
         checkArray(Arrays.asList(emptyArray, emptyArray), Type.ARBITRARY_ARRAY.array());
     }
 
-    @Test
-    public void testMixedArrayExpressions() {
-        checkArray(Arrays.asList(seven, half), Type.NUMBER.array());
-        checkArray(Arrays.asList(half, seven), Type.NUMBER.array());
-        checkArray(Arrays.asList(half, seven, half), Type.NUMBER.array());
-        checkArray(Arrays.asList(seven, half, eight), Type.NUMBER.array());
-        checkArray(Arrays.asList(arrayOfOneSeven, nullLiteral), Type.WHOLE_NUMBER.array().array());
-    }
 
-    @Test
-    public void testIncompatibles() {
-        checkArray(Arrays.asList(arrayOfOneNull, arrayOfOneSeven), Type.ARBITRARY);
-    }
 }

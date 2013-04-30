@@ -19,7 +19,7 @@ import org.junit.runners.Parameterized.Parameters;
 import com.josephcrawley.Spitfire.entities.Script;
 
 /**
- * A unit test for the front end of the Manatee compiler. It reads all the ".manatee" files
+ * A unit test for the front end of the Spitfire compiler. It reads all the ".sf" files
  * in the src/test/resources directory. Whenever a filename starts with "synerror" the tester
  * asserts that the compiler will detect a syntax error. Whenever a name starts with "semerror"
  * the tester asserts that the compiler successfully parses the program, then asserts that a
@@ -29,8 +29,8 @@ import com.josephcrawley.Spitfire.entities.Script;
 @RunWith(Parameterized.class)
 public class FrontEndTest {
 
-    private static final String TEST_DIRECTORY = "src/test/manatee";
-    private static final String EXTENSION = ".manatee";
+    private static final String TEST_DIRECTORY = "src/test/spitfire";
+    private static final String EXTENSION = ".sf";
 
     private String filename;
 
