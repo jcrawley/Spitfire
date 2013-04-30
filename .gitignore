@@ -2,9 +2,9 @@ target
 .classpath
 .project
 .settings
+.metadata
 bin
 
 *.class
 .DS_store
-.metadata
 
