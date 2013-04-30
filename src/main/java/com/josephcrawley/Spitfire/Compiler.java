@@ -1,15 +1,15 @@
-package edu.lmu.cs.xlg.manatee;
+package com.josephcrawley.Spitfire.entities;
 
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.Reader;
 
-import edu.lmu.cs.xlg.manatee.entities.Script;
-import edu.lmu.cs.xlg.manatee.entities.SymbolTable;
-import edu.lmu.cs.xlg.manatee.generators.Generator;
+import com.josephcrawley.Spitfire.entities.Script;
+import com.josephcrawley.Spitfire.entities.SymbolTable;
+import com.josephcrawley.Spitfire.generators.Generator;
 import edu.lmu.cs.xlg.manatee.syntax.Parser;
-import edu.lmu.cs.xlg.util.Log;
+import com.josephcrawley.util.Log;
 
 /**
  * A compiler for manatee.

@@ -1,4 +1,4 @@
-package edu.lmu.cs.xlg.manatee.generators;
+package com.josephcrawley.Spitfire.generators;
 
 import java.io.PrintWriter;
 import java.util.HashMap;
@@ -6,9 +6,9 @@ import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 
-import edu.lmu.cs.xlg.manatee.entities.Entity;
-import edu.lmu.cs.xlg.manatee.entities.Declaration;
-import edu.lmu.cs.xlg.manatee.entities.Script;
+import com.josephcrawley.Spitfire.entities.Entity;
+import com.josephcrawley.Spitfire.entities.Declaration;
+import com.josephcrawley.Spitfire.entities.Script;
 
 /**
  * An generator that translates a Manatee script into some other form.  The result of the

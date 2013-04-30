@@ -1,4 +1,4 @@
-package edu.lmu.cs.xlg.manatee.entities;
+package com.josephcrawley.Spitfire.entities;
 
 /**
  * A type which is an array. Array types objects are never constructed during syntax analysis.

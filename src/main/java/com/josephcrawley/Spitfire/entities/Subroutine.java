@@ -3,7 +3,7 @@ package com.josephcrawley.Spitfire.entities;
 import java.util.Iterator;
 import java.util.List;
 
-import edu.lmu.cs.xlg.util.Log;
+import com.josephcrawley.util.Log;
 
 /**
  * The superclass for procedures and functions.

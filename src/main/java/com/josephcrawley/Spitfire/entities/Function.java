@@ -2,7 +2,7 @@ package com.josephcrawley.Spitfire.entities;
 
 import java.util.List;
 
-import edu.lmu.cs.xlg.util.Log;
+import com.josephcrawley.util.Log;
 
 /**
  * A subroutine called from an expression.  It therefore has a return type.

@@ -3,7 +3,7 @@ package com.josephcrawley.Spitfire.entities;
 import java.util.ArrayList;
 import java.util.List;
 
-import edu.lmu.cs.xlg.util.Log;
+import com.josephcrawley.util.Log;
 
 /**
  * A Manatee block.

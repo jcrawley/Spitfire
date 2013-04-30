@@ -1,4 +1,4 @@
-package edu.lmu.cs.xlg.util;
+package com.josephcrawley.util;
 
 import java.io.PrintWriter;
 import java.text.MessageFormat;

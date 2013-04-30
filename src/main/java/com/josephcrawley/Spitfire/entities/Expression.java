@@ -1,6 +1,6 @@
 package com.josephcrawley.Spitfire.entities;
 
-import com.josephcrawley.Spitfire.entities;
+import com.josephcrawley.util.Log;
 
 /**
  * An expression.

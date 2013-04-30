@@ -1,6 +1,6 @@
 package com.josephcrawley.Spitfire.entities;
 
-import com.josephcrawley.Spitfire.entities;
+import com.josephcrawley.util.Log;
 
 /**
  * A number literal, like "2.3", "4.6634E-231", etc.
