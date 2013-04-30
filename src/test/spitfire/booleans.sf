@@ -1,5 +1,5 @@
 $checking booleans
 $based on README
 
-S s = T || F ? "spit" : "fire" 
-T && F 
+P S s = T || F ? "spit" : "fire"
+P T && F
