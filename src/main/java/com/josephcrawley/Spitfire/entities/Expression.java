@@ -93,4 +93,10 @@ public abstract class Expression extends Entity {
         }
     }
 
+    void assertArrayOrString(String context, Log log) {
+        if (!(isArrayOrString())) {
+            log.error("non_array_or_string", context);
+        }
+    }
+
 }

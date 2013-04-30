@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import edu.lmu.cs.xlg.util.Log;
+import com.josephcrawley.util.Log;
 
 /**
  * An array expression, such as [3.50, 9, -6], or [].  The type of the array expression is

@@ -1,6 +1,6 @@
 package com.josephcrawley.Spitfire.entities;
 
-import edu.lmu.cs.xlg.util.Log;
+import com.josephcrawley.util.Log;
 
 /**
  * A simple typsafe enum of the two boolean literals, yes and no.

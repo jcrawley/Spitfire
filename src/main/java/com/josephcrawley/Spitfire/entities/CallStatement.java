@@ -2,7 +2,7 @@ package com.josephcrawley.Spitfire.entities;
 
 import java.util.List;
 
-import edu.lmu.cs.xlg.util.Log;
+import com.josephcrawley.util.Log;
 
 public class CallStatement extends Statement {
 

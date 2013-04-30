@@ -1,4 +1,4 @@
-package com.josephcrawley.Spitfire.entities;
+package com.josephcrawley.Spitfire;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -8,7 +8,7 @@ import java.io.Reader;
 import com.josephcrawley.Spitfire.entities.Script;
 import com.josephcrawley.Spitfire.entities.SymbolTable;
 import com.josephcrawley.Spitfire.generators.Generator;
-import edu.lmu.cs.xlg.manatee.syntax.Parser;
+import com.josephcrawley.Spitfire.syntax.Parser;
 import com.josephcrawley.util.Log;
 
 /**

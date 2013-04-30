@@ -1,6 +1,6 @@
 package com.josephcrawley.Spitfire.entities;
 
-import edu.lmu.cs.xlg.util.Log;
+import com.josephcrawley.util.Log;
 
 /**
  * A statement for writing a single expression to standard output.
@@ -17,7 +17,7 @@ public class WriteStatement extends Statement {
         return expression;
     }
 
-    @Override
+    //@Override
     public void analyze(Log log, SymbolTable table, Subroutine owner, boolean inLoop) {
         expression.analyze(log, table, owner, inLoop);
     }

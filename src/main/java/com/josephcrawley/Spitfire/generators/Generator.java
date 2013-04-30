@@ -4,10 +4,8 @@ import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.commons.lang3.StringUtils;
-
-import com.josephcrawley.Spitfire.entities.Entity;
 import com.josephcrawley.Spitfire.entities.Declaration;
+import com.josephcrawley.Spitfire.entities.Entity;
 import com.josephcrawley.Spitfire.entities.Script;
 
 /**
@@ -64,7 +62,7 @@ public abstract class Generator {
             idMap.put(e, suffix);
         }
         String name = e instanceof Declaration ? Declaration.class.cast(e).getName() : "";
-        if (StringUtils.isBlank(name)) {
+        if (name == null || name.isEmpty()) {
             name = "$";
         }
         return name + "_" + suffix;

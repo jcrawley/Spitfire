@@ -1,6 +1,6 @@
 package com.josephcrawley.Spitfire.entities;
 
-import edu.lmu.cs.xlg.util.Log;
+import com.josephcrawley.util.Log;
 
 /**
  * A loop that executes as long as a single expression is true.

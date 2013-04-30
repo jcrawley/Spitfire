@@ -5,9 +5,6 @@ import java.util.List;
 
 import com.josephcrawley.util.Log;
 
-/**
- * A Manatee block.
- */
 public class Block extends Entity {
 
     private List<Statement> statements = new ArrayList<Statement>();
