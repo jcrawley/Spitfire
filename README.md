@@ -21,13 +21,6 @@ Variable declarations are simple and easy in Spitfire. No semicolons necessary!
     N hex = 0x34A4                              var hex = 0x34A4;
     C f = 'f'                                   var f = 'f';
 
-**PARALLEL DECLARATION**
-
-Spitfire allows parallel declaration. simply put a space between the variables you want to declare, and a space between the values you want the variables to be inititialized to.
-
-    S s f = "spit" "fire"                       var s = "spit";
-                                                var f = "fire";
-
 **CONSTANTS**
 
 In Spitfire constants start with `_`. Uppercase identifier names are not allowed.
@@ -48,16 +41,6 @@ Arithmetic expressions work similarly to most languages. Spitfire allows both `^
 
     (3/2 - (a * b)) ^ ((300 % c) + d ** 2)      Math.pow(3/2 - a * b, (300 % c) + Math.pow(d,2))
 
-**SWAP**
-
-Spitfire allows its user to swap two variables by using `<=>`. It is demonstrated below. The types of the two variables that are being switched do not need to be the same.
-
-    N x = 34                                    var x = 34;
-    S s = "spitfire"                            var s = "spitfire";
-    x <=> y                                     _1 = x;
-                                                _2 = y;
-                                                x = _2;
-                                                y = _1;
 
 **BOOLEANS AND BOOLEAN ARITHMETIC**
 
@@ -72,17 +55,17 @@ In Spitfire, true and false are denoted by `T` and `F` respectively. Spitfire al
 
 Function calls in Spitfire will work as shown below. A return type is optional in Spitfire. If nothing is provided after the function name, the function is assumed to return void.
 
-    DF N bmi (N pounds, N inches)               var bmi = function (pounds, inches) {
+    DF N bmi (N pounds, N inches){               var bmi = function (pounds, inches) {
       N _kilograms_per_pound = 0.45359237           var KILOGRAMS_PER_POUND = 0.45359237;
       N _meters_per_inch = 0.0254                   var METERS_PER_INCH = 0.0254;
       N kilos = pounds * _kilograms_per_pound       var kilos = pounds * KILOGRAMS_PER_POUND;
       N inches = inches * _meters_per_inch          var inches = inches * METERS_PER_INCH;
       R kilos / (meters * meters)                   return kilos / (meters * meters)
-                                                }
+    }                                            }
         
-    DF N gcd (x, y)                             var gcd = function (x, y) {
+    DF N gcd (x, y){                             var gcd = function (x, y) {
       R x % y == 0 ? x : gcd(y, x % y)              return x%y == 0 ? x : gcd(y, x%y); 
-                                                }
+    }                                            }
                                                                   
 **KEYWORDS**
 
@@ -114,10 +97,11 @@ In Spitfire, there are five main types: `B` is for booleans, `N` is for any type
 
 Classes in Spitfire are very simple. After naming the class, you simply need to state which variables you want to be associated with the class.
 
-    DC point
+    DC point{
       N x
       N y
       S color
+    }  
       
 Class names automatically become constructor functions, taking as arguments the fields in the order that they were declared:
 
@@ -167,14 +151,11 @@ In Spitfire, users can typecast any expression with the `::` operator.
 
 Spitfire includes three different types of loops: `L` to loop a fixed number of times, or forever; `LU` to loop until and expression is true, `LF` to loop for elements in a range or sequence, and `LW` to loop while an expression is true.
  
-    L                                       while (true) {
+    L {                                       while (true) {
       P "make it stop"                          console.log("make it stop");
-                                            }
+    }                                        }
       
-    L 5                                     for (var i = 0; i < 5; i++) {
-      P i                                       console.log(i);                                          
-                                            }
-                                            
+                                      
     LF i 1 100 1                            for (var i = 1; i <= 100; i++) {
       S fb = i % 3 == 0 ? "Fizz" : ""           if (i % 15 == 0) {
       fb += i % 5 == 0 ? 'Buzz' : ""               console.log("FizzBuzz");
