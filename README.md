@@ -234,7 +234,6 @@ Here is the syntax for Spitfire. Our EBNF symbols are as follows: `|` is for alt
     VARDEC        →  TYPE ID (ID)* '=' EXP (EXP)*
     FUNDEC        →  'DF' ID PARAMS BR BLOCK
     CLASSDEC      →  'DC' ID BR VARDEC+
-    ARRAYDEC      →  '[' TYPE ']' '=' (ID | '[' EXP (',' EXP)* ']')
     PARAMS        →  '(' ID (ID ',')* ')'
     ASSIGNMENT    →  ID '=' EXP
     PRINTSTMT     →  'P' EXP
