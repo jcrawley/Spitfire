@@ -1,5 +1,5 @@
 package com.josephcrawley.Spitfire.entities;
-import com.josephcrawley.util.Log;
+import com.josephcrawley.util.*;
 
 public class PrintStatement extends Statement {
 
@@ -13,8 +13,8 @@ public class PrintStatement extends Statement {
         return operand;
     }
 
-    @Override
+
     public void analyze(Log log, SymbolTable table, Subroutine owner, boolean inLoop) {
-        // TODO Auto-generated method stub
+        operand.analyze(log, table, owner, inLoop);
     }
 }

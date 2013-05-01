@@ -183,7 +183,7 @@ ReturnStatement RETURNSTMT():
 }
 
 // -----------------------
-// DEC -> VARDEC | FUNCDEC
+// DEC -> VARDEC | FUNCDEC | ARRAYDEC
 // -----------------------
 
 Statement DEC(): {
@@ -206,9 +206,10 @@ Variable VARDEC(): {
     Token v = null;
     Expression e = null;
 }{
-    t = TYPE() v = <ID> "=" e = EXP()
+    t = TYPE() v = <ID> "=" e = EXP() (< BR >)
     {return new Variable(v.image, t, e);}
 }
+
 
 // --------------------------------------------------------------
 // TYPE -> 'B' | 'N' | 'C' | 'S' | 'Y' | ID | '<>' | '[' TYPE ']'
