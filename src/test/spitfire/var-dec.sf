@@ -4,5 +4,5 @@ $Simple tesing of Variable declarations
 
 S s = "Spitfire"
 B found = T
-N hex = 0x34A4
+$N hex = 0x34A4
 C f = 'f'

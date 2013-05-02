@@ -2,4 +2,5 @@ $checking booleans
 $based on README
 
 S s = T || F
+
 P T && F
