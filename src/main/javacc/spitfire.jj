@@ -37,7 +37,7 @@ public class Parser {
 PARSER_END(Parser)
 
 SKIP: {
-    " " | "\t" | <"$" (~["\n","\r"])*>
+    " " | "\t" | <"$" (~["\n","\r"])*> | <"$$" (~["\u0000"-"\u001f", "\u007f"-"\u009f"]|"\n"|"\r")* "$$">
 }
 
 // Reserved Words and symbols
