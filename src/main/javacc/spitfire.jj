@@ -464,6 +464,7 @@ Expression EXP7(): {
     VariableExpression v;
     Expression e = null;
     Token t;
+    List<Expression > expressions = new ArrayList<Expression >();
 }{
     "<>" {return NullLiteral.INSTANCE;}
 |
@@ -479,7 +480,7 @@ Expression EXP7(): {
 |
     v = VAREXP() {return v;}
 |
-    "[" EXP() ("," EXP())* "]" {return BooleanLiteral.TRUE;  /*IMPLEMENT ME*/ }
+    "[" (e = EXP() {expressions.add(e);}) ("," e = EXP() {expressions.add(e);})* "]" //{return ArrayLiteral(expressions);  /*IMPLEMENT ME*/ }
 | 
     "(" e = EXP() ")" {return e;}
 }
