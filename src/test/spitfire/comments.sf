@@ -7,9 +7,9 @@ $single-line comment
 $test here
 
 $$
-Multiple comments
-going troll this block
-ROFL
+$Multiple comments
+$going troll this block
+$ROFL  
 $$
 
 P "I HAZ COMMENTS"
