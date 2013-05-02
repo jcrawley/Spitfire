@@ -2,13 +2,11 @@ $Jonathan Piatos
 $Checking Loops and If-statements
 $As of 4/12/2013
 
-LF i 1 100 1 {
-    S fb = i % 3 == 0 ? "Fizz" : ""
-    fb += i & 5 == 0 ? "Buzz" : ""
-    P fb
+LF i 1 : 100 : 1 {
+   P i
 }
 
-LF x a {
+LF x a : 3 {
     P i
 }
 

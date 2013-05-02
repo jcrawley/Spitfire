@@ -1,5 +1,6 @@
 $creating basic function calls
 
 DF N gcd (N x , N y) {
-  R x % y == 0 $- x : gcd(y, x % y)
+  R x % y == 0 
+  $- x : gcd(y, x % y)
 }
