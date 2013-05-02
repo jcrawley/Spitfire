@@ -12,7 +12,7 @@ import com.josephcrawley.Spitfire.syntax.Parser;
 import com.josephcrawley.util.Log;
 
 /**
- * A compiler for manatee.
+ * A compiler for Spitfire.
  *
  * <p>This class contains a static <code>main</code> method allowing you to run the compiler
  * from the command line, as well as a few methods to compile, or even run specific phases of

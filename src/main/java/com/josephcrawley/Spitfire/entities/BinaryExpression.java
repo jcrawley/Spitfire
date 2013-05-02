@@ -51,7 +51,7 @@ public class BinaryExpression extends Expression {
             type = Type.STRING;
 
         // num op num (for arithmetic op)
-        } else if (op.matches("[-+*/]")) {
+        } else if (op.matches("[^-+*/]")) {
             left.assertArithmetic(op, log);
             right.assertArithmetic(op, log);
             type = Type.NUMBER;

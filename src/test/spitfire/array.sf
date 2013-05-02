@@ -1,7 +1,13 @@
 $array.sf
 $based on Spitfire's EBNF
 
-[N] p = [100, 10, 300, 1, 93]
-P p[1]
-[N] q = p
-[Y] a = [88, 'false', "test", "10", green]
+
+[N] x = [1,2,3]
+
+$[N] p = [100, 10, 300, 1, 93]
+
+$P p[1]
+
+$[N] q = p
+
+$[Y] a = [88, 'false', "test", "10", green]

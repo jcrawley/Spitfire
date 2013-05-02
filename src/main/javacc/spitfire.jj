@@ -46,11 +46,11 @@ TOKEN: {
     "I" | "EI" | "E" | "DF" | "DC" | "L" | "R" | "B"
     | "N" | "S" | "C" | "Y" | "< >" | "T" | "F" | "P" | "LU" | "LF"
     | "LW"| ":" | "," | "+" | "-" | "*" | "/" | "==" | "^" | "|" | "@" | "::"
-    | "<" | "<=" | "=" | ">=" | ">" | "(" | ")" | "[" | "]" | "{" | "}" | "$"
+    | "<" | "<=" | "=" | ">=" | ">" | "(" | ")" | "[" | "]" | "{" | "}" | "$" | "?" 
 |
     < BR: "\n" | "\r" | "\r\n" >
 |
-    < NUMLIT: (["0"-"9"])+ "." (["0"-"9"])* (<EXPONENT>)? >
+    < NUMLIT: (["0"-"9"])+ ("." ["0"-"9"])* (<EXPONENT>)? >
 |
     < #EXPONENT: ("x"|"") "10^" ("-")? (["0"-"9"])+ >
 |
@@ -183,7 +183,7 @@ ReturnStatement RETURNSTMT():
 }
 
 // -----------------------
-// DEC -> VARDEC | FUNCDEC | ARRAYDEC
+// DEC -> VARDEC | FUNCDEC | ARRAYDEC 
 // -----------------------
 
 Statement DEC(): {
@@ -206,7 +206,7 @@ Variable VARDEC(): {
     Token v = null;
     Expression e = null;
 }{
-    t = TYPE() v = <ID> "=" e = EXP() (< BR >)
+    t = TYPE() v = <ID> "=" e = EXP()
     {return new Variable(v.image, t, e);}
 }
 
@@ -269,6 +269,7 @@ void PARAMS(List<Variable> params): {
         ")"
     )
 }
+
 
 // ----------------------
 // BLOCK -> (BR STMT)+
@@ -478,6 +479,8 @@ Expression EXP7(): {
 |
     v = VAREXP() {return v;}
 |
+    "[" EXP() ("," EXP())* "]" {return BooleanLiteral.TRUE;  /*IMPLEMENT ME*/ }
+| 
     "(" e = EXP() ")" {return e;}
 }
 
