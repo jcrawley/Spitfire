@@ -24,7 +24,7 @@ public class Compiler {
      * A logger for logging messages (both regular and error messages). The base properties file
      * is called <code>manatee.properties</code>.
      */
-    private Log log = new Log("Manatee", new PrintWriter(System.out, true));
+    private Log log = new Log("Spitfire", new PrintWriter(System.out, true));
 
     /**
      * Runs the compiler as an application.

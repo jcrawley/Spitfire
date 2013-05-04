@@ -10,7 +10,8 @@ P a + b
 P c - a
 P a * b * c * d
 P b * c / b
-P (a + b) * c % d   
+
+$P (a + b) * c % d   
 
 $More complex arithmetic operation 
 $result should be -4
