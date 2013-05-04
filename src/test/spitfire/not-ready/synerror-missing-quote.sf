@@ -1,0 +1,4 @@
+$checking 'no quotes'
+
+P "This is supposed to FAIL 
+$there is a missing quote at the end of this

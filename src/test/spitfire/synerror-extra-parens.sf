@@ -1,0 +1,7 @@
+$syntax error for extra parenthesis 
+
+N x = 10
+N y = 5
+N z = 2
+
+P (x * y + z * (x - z) - 10 / 8 - y)  % ( x * y * z ))
