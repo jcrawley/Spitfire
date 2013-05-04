@@ -1,0 +1,5 @@
+$FAIL! assign variables with wrong type
+
+N n = "yes"
+
+P n

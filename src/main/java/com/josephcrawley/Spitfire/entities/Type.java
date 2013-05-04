@@ -2,9 +2,6 @@ package com.josephcrawley.Spitfire.entities;
 
 import com.josephcrawley.util.Log;
 
-/**
- * A Manatee type object.
- */
 public class Type extends Declaration {
 
     public static final Type NUMBER = new Type("number");

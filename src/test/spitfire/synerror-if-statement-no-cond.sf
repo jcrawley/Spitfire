@@ -1,0 +1,7 @@
+$if statement w/ no conditions
+
+N x = 10 
+
+I {
+   P x
+}

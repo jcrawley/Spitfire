@@ -1,0 +1,5 @@
+$no conditions set within while-loop
+
+LW {
+   P "This should fail"
+}
