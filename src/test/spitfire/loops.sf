@@ -1,6 +1,6 @@
-$Jonathan Piatos
-$Checking Loops and If-statements
-$As of 4/12/2013
+$checking while loops
+
+
 
 LF i 1 : 100 : 1 {
    P i
