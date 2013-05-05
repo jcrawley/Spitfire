@@ -1,5 +1,5 @@
-$creating basic function calls
+$creating constants
 
-DF N gcd (N x , N y) {
-  P x
-}
+N _cons = 3
+
+P _cons

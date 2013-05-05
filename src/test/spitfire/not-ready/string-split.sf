@@ -1,0 +1,3 @@
+$simple string split
+
+P "Test, this!" | ""
