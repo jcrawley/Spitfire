@@ -1,20 +1,22 @@
-$checking while loops
+$checking loops
 
-
-
+$$
 LF i 1 : 100 : 1 {
    P i
 }
 
 LF x a : 3 {
     P i
-}
+}$$
+
+N x = 11
 
 LW x > 10 {
-    I x < 5 {
-        x = x -2
-    } E {
-        x = x -1
-    }
-    P x
+    P "hello"
 }
+
+$    I x < 5 {
+ $       x = x -2
+  $  } E {
+ $       x = x -1
+$    }

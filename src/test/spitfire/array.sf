@@ -1,8 +1,9 @@
-$array.sf
-$based on Spitfire's EBNF
+$creating basic arrays
 
 
-[N] x = [1,2,3]
+[N] x = ["hello","world"]
+
+P x
 
 $[N] p = [100, 10, 300, 1, 93]
 

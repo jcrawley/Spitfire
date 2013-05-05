@@ -5,14 +5,15 @@ N b = 5
 N c = 3
 N d = 15
 
-$simple arithmetic
+P a + b
+
+$$simple arithmetic
 P a + b
 P c - a
 P a * b * c * d
 P b * c / b
-
-$P (a + b) * c % d   
-
+P (a + b) * c % d   
+$$
 $More complex arithmetic operation 
 $result should be -4
 $P (3 / 2 - (a * b)) ^ ((300 % c) + d ** 2)

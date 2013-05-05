@@ -22,7 +22,7 @@ public class Compiler {
 
     /**
      * A logger for logging messages (both regular and error messages). The base properties file
-     * is called <code>manatee.properties</code>.
+     * is called <code>Spitfire.properties</code>.
      */
     private Log log = new Log("Spitfire", new PrintWriter(System.out, true));
 
@@ -75,7 +75,7 @@ public class Compiler {
     }
 
     /**
-     * Checks the syntax of a manatee Script read from a given reader object.
+     * Checks the syntax of a Spitfire Script read from a given reader object.
      *
      * @param reader
      *     the source
@@ -94,8 +94,8 @@ public class Compiler {
     }
 
     /**
-     * Checks the static semantics of a manatee script object, generally one already produced from
-     * a parse.  This method is useful for testing or in cases where you want to embed an manatee
+     * Checks the static semantics of a Spitfire script object, generally one already produced from
+     * a parse.  This method is useful for testing or in cases where you want to embed an Spitfire
      * compiler in a larger application.
      *
      * @param script
@@ -110,7 +110,7 @@ public class Compiler {
     }
 
     /**
-     * Checks the syntax and static semantics of a manatee Script from a reader.
+     * Checks the syntax and static semantics of a Spitfire Script from a reader.
      *
      * @param reader
      *     the source
@@ -126,7 +126,7 @@ public class Compiler {
     }
 
     /**
-     * Reads a manatee script from the given reader and outputs a equivalent script to the
+     * Reads a Spitfire script from the given reader and outputs a equivalent script to the
      * given writer.
      *
      * @param reader
