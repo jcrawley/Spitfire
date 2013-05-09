@@ -10,7 +10,7 @@ public class Type extends Declaration {
     public static final Type STRING = new Type("string");
     public static final Type ANY = new Type("any");
     public static final Type ARRAY = new Type("[]");
-    public static final Type NULL = new Type("<>");
+    public static final Type NULL_TYPE = new Type("<>");
 
     /**
      * An internal type for functions.
@@ -79,7 +79,7 @@ public class Type extends Declaration {
      */
     public boolean canBeAssignedTo(Type that) {
         return this == that
-        || this == NULL && that.isReference()
+        || this == NULL_TYPE && that.isReference()
         || this == ARBITRARY_ARRAY && that instanceof ArrayType
         || this == ARBITRARY
         || that == ARBITRARY

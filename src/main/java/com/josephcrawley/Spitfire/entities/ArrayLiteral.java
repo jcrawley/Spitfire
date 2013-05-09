@@ -15,10 +15,9 @@ import com.josephcrawley.util.Log;
 public class ArrayLiteral{
 
 
-	private String typename;
     private List<Expression> args;
 
-    public ArrayLiteral(List<Expression> args) { //NEED TO IMPLEMENT TYPE
+    public ArrayLiteral(List<Expression> args) { 
         this.args = args;
     }
 
