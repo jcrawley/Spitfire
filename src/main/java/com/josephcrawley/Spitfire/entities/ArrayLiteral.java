@@ -1,6 +1,6 @@
 package com.josephcrawley.Spitfire.entities;
 
-import java.util.List;
+import java.util.*;
 
 import com.josephcrawley.util.Log;
 
@@ -20,7 +20,10 @@ public class ArrayLiteral{
     public ArrayLiteral(List<Expression> args) { 
         this.args = args;
     }
-
+    
+    public ArrayLiteral(ArrayList<Expression> args) { 
+        this.args = args;
+    }
     public String getTypename() {
     	if(args.size() <= 0){
     		return "<arbitrary array>";
