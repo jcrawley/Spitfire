@@ -23,7 +23,10 @@ public class ArrayLiteral{
     }
 
     public String getTypename() {
-        return typename;
+    	if(args.size() <= 0){
+    		return "<arbitrary array>";
+    	}
+    	else{ return args.get(0).getType().getName();}
     }
 
     public List<Expression> getArgs() {

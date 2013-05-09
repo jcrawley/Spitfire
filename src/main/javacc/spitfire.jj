@@ -499,7 +499,7 @@ Expression EXP7(): {
 |
     v = VAREXP() {return v;}
 |
-    "[" (e = EXP() {expressions.add(e);}) ("," e = EXP() {expressions.add(e);})* "]" //{return ArrayLiteral(expressions);  /*IMPLEMENT ME*/ }
+    "[" (e = EXP() {expressions.add(e);}) ("," e = EXP() {expressions.add(e);})* "]" {return ArrayLiteral(expressions);  }
 | 
     "(" e = EXP() ")" {return e;}
 }
