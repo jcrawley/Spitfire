@@ -90,7 +90,7 @@ public abstract class Entity {
      */
     @Override
     public String toString() {
-        return "#" + getId();
+        return "" + getId();
     }
 
     /**
@@ -239,91 +239,91 @@ public abstract class Entity {
      *   <li>Whether we are in a loop, necessary for checking break statements, for example.
      * </ul>
      */
-//    public static class AnalysisContext {
-//        private Log log;
-//        private SymbolTable table;
-//        private Function function;
-//        private boolean inLoop;
-//
-//        private AnalysisContext(Log log, SymbolTable table, Function function, boolean inLoop) {
-//            this.log = log;
-//            this.table = table;
-//            this.function = function;
-//            this.inLoop = inLoop;
-//        }
-//
-//        public static AnalysisContext makeGlobalContext(Log log) {
-//            AnalysisContext context = new AnalysisContext(log, null, null, false);
-//            SymbolTable global = new SymbolTable(null);
-//            global.insert(Type.INT, context.getLog());
-//            global.insert(Type.REAL, context.getLog());
-//            global.insert(Type.BOOLEAN, context.getLog());
-//            global.insert(Type.CHAR, context.getLog());
-//            global.insert(Type.STRING, context.getLog());
-//            global.insert(Function.GET_STRING, context.getLog());
-//            global.insert(Function.SUBSTRING, context.getLog());
-//            global.insert(Function.SQRT, context.getLog());
-//            global.insert(Function.PI, context.getLog());
-//            global.insert(Function.SIN, context.getLog());
-//            global.insert(Function.COS, context.getLog());
-//            global.insert(Function.ATAN, context.getLog());
-//            global.insert(Function.LN, context.getLog());
-//            return context.withTable(global);
-//        }
-//
-//        public AnalysisContext withTable(SymbolTable table) {
-//            return new AnalysisContext(this.log, table, this.function, this.inLoop);
-//        }
-//
-//        public AnalysisContext withFunction(Function function) {
-//            return new AnalysisContext(this.log, this.table, function, this.inLoop);
-//        }
-//
-//        public AnalysisContext withInLoop(boolean inLoop) {
-//            return new AnalysisContext(this.log, this.table, this.function, inLoop);
-//        }
-//
-//        public Log getLog() {
-//            return log;
-//        }
-//
-//        public SymbolTable getTable() {
-//            return table;
-//        }
-//
-//        public Function getFunction() {
-//            return function;
-//        }
-//
-//        public boolean isInLoop() {
-//            return inLoop;
-//        }
-//
-//        public Type lookupType(String name) {
-//            return getTable().lookupType(name, getLog());
-//        }
-//
-//        public Variable lookupVariable(String name) {
-//            return getTable().lookupVariable(name, getLog());
-//        }
-//
-//        public Function lookupFunction(String name, List<Expression> args) {
-//            return getTable().lookupFunction(name, args, getLog());
-//        }
-//
-//        public void error(String errorKey, Object... arguments) {
-//            log.error(errorKey, arguments);
-//        }
-//    }
-//
+    public static class AnalysisContext {
+        private Log log;
+        private SymbolTable table;
+        private Function function;
+        private boolean inLoop;
+
+        private AnalysisContext(Log log, SymbolTable table, Function function, boolean inLoop) {
+            this.log = log;
+             this.table = table;
+             this.function = function;
+             this.inLoop = inLoop;
+         }
+ 
+         public static AnalysisContext makeGlobalContext(Log log) {
+             AnalysisContext context = new AnalysisContext(log, null, null, false);
+             SymbolTable global = new SymbolTable(null);
+             global.insert(Type.NUMBER, context.getLog());
+             global.insert(Type.BOOLEAN, context.getLog());
+             global.insert(Type.CHARACTER, context.getLog());
+             global.insert(Type.STRING, context.getLog());
+             global.insert(Function.GET_STRING, context.getLog());
+             /*global.insert(Function.SUBSTRING, context.getLog());
+             global.insert(Function.SQRT, context.getLog());
+             global.insert(Function.PI, context.getLog());
+             global.insert(Function.SIN, context.getLog());
+             global.insert(Function.COS, context.getLog());
+             global.insert(Function.ATAN, context.getLog());
+             global.insert(Function.LN, context.getLog());*/
+             return context.withTable(global); 
+             
+         }
+ 
+         public AnalysisContext withTable(SymbolTable table) {
+             return new AnalysisContext(this.log, table, this.function, this.inLoop);
+         }
+ 
+         public AnalysisContext withFunction(Function function) {
+             return new AnalysisContext(this.log, this.table, function, this.inLoop);
+         }
+ 
+         public AnalysisContext withInLoop(boolean inLoop) {
+             return new AnalysisContext(this.log, this.table, this.function, inLoop);
+         }
+ 
+         public Log getLog() {
+             return log;
+         }
+ 
+         public SymbolTable getTable() {
+             return table;
+         }
+ 
+         public Function getFunction() {
+             return function;
+         }
+ 
+         public boolean isInLoop() {
+             return inLoop;
+         }
+ 
+         public Type lookupType(String name) {
+             return getTable().lookupType(name, getLog());
+         }
+ 
+         public Variable lookupVariable(String name) {
+             return  getTable().lookupVariable(name, getLog());
+         }
+ 
+         public Function lookupFunction(String name, List<Expression> args) {
+             return getTable().lookupFunction(name, args, getLog());
+         }
+ 
+         public void error(String errorKey, Object... arguments) {
+             log.error(errorKey, arguments);
+         }
+     }
+ 
     /**
      * Performs semantic analysis on this entity, and (necessarily) on its descendants.
      */
-    //
-    // You can only use this if you change all the analyze methods in all the entity classes.
+     
+    //  You can only use this if you change all the analyze methods in all the entity classes.
 
-    //public abstract void analyze(AnalysisContext context);
+    // public abstract void analyze(AnalysisContext context);
 
-    // Use this one for now.
+     // Use this one for now.
     public abstract void analyze(Log log, SymbolTable table, Subroutine owner, boolean inLoop);
 }

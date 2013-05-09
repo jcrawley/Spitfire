@@ -2,6 +2,7 @@ package com.josephcrawley.Spitfire.entities;
 
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -138,4 +139,14 @@ public class SymbolTable extends Entity {
     public void analyze(Log log, SymbolTable table, Subroutine owner, boolean inLoop) {
         // Intentionally empty
     }
+
+	public Function lookupFunction(String name, List<Expression> args, Log log) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Variable lookupVariable(String name, Log log) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

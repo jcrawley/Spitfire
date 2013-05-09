@@ -9,7 +9,8 @@ import com.josephcrawley.util.Log;
  */
 public class Function extends Subroutine {
 
-    private Type returnType;
+    public static final Declaration GET_STRING = null;
+	private Type returnType;
 
     public Function(Type returnType, String name, List<Variable> parameters, Block body) {
         super(name, parameters, body);

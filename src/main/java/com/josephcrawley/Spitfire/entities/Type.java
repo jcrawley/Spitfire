@@ -9,16 +9,13 @@ public class Type extends Declaration {
     public static final Type CHARACTER = new Type("character");
     public static final Type STRING = new Type("string");
     public static final Type ANY = new Type("any");
+    public static final Type ARRAY = new Type("[]");
+    public static final Type NULL = new Type("<>");
 
     /**
      * An internal type for functions.
      */
     public static final Type FUNCTION = new Type("<function>");
-
-    /**
-     * The type whose sole member is the literal <code>nothing</code>.
-     */
-    public static final Type NULL_TYPE = new Type("<null type>");
 
     /**
      * A type representing the union of all types.  It is assigned to an entity whose typename is
@@ -82,7 +79,7 @@ public class Type extends Declaration {
      */
     public boolean canBeAssignedTo(Type that) {
         return this == that
-        || this == NULL_TYPE && that.isReference()
+        || this == NULL && that.isReference()
         || this == ARBITRARY_ARRAY && that instanceof ArrayType
         || this == ARBITRARY
         || that == ARBITRARY
