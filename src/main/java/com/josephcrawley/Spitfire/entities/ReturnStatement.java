@@ -21,12 +21,12 @@ public class ReturnStatement extends Statement {
     public void analyze(Log log, SymbolTable table, Subroutine owner, boolean inLoop) {
         if (owner == null) {
             // At top-level, not inside any function
-            log.error("return.outside.subroutine");
+            log.error("return_outside_funciton");
 
         } else if (owner instanceof Procedure) {
             // Inside a procedure, we can't have a return expression
             if (expression != null) {
-                log.error("return.value.not.allowed");
+                log.error("return_value_not_allowed");
             }
 
         } else /* owner instanceof Function */ {

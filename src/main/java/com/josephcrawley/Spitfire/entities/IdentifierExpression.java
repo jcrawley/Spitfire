@@ -39,7 +39,7 @@ public class IdentifierExpression extends VariableExpression {
         } else if (referent instanceof Function) {
             type = Type.FUNCTION;
         } else {
-            log.error("bad.expression");
+            log.error("bad_expression");
         }
     }
 }
