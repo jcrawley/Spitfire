@@ -456,30 +456,11 @@ Expression EXP5(): {
     {return op == null ? e : new UnaryExpression(op, e);}
 }
 
-// -----------------------------------------------
-// EXP6 -> EXP7 ('::' TYPE | '@' EXP7 | '|' EXP7)?
-// -----------------------------------------------
+// -----------------------------------------------------------------
+// EXP6 -> 'T' | 'F' | NUMLIT | CHARLIT | STRLIT | VAR | '(' EXP ')'
+// -----------------------------------------------------------------
 
 Expression EXP6(): {
-    Expression e1, e2;
-    Type t;
-}{
-    e1 = EXP7()
-    (
-        "::" t = TYPE() {e1 = new CastExpression(e1, t);}
-    |
-        "@" e2 = EXP7() {e1 = new BinaryExpression(e1, "@", e2);}
-    |
-        "|" e2 = EXP7() {e1 = new BinaryExpression(e1, "|", e2);}
-    )?
-    {return e1;}
-}
-
-// -----------------------------------------------------------------
-// EXP7 -> 'T' | 'F' | NUMLIT | CHARLIT | STRLIT | VAR | '(' EXP ')'
-// -----------------------------------------------------------------
-
-Expression EXP7(): {
     VariableExpression v;
     Expression e = null;
     Token t;

@@ -129,23 +129,11 @@ Numbers in Spitfire can be denoted as octal, hexadecimal, or decimal. Octal numb
 Strings in Spitfire are easy to manipulate and use. Many ways of manipulating string in Spitfire use thses brackets: `[` and `]`. For a certain slice of a string, one can specify which part by viewing the string as an array of characters. Let us use `i` and `j` to describe how this works. `i` will be the beginning index and `j` to denote the end index. If a user puts `[i..j]` after a string, the slice of the string, not including `j`, will be returned. If a user simply puts `[i..]`, the slice will be from the beginning index until the end of the string.
 
     S s = "Hello” + “world!”                var s = “Hello” + “world!”; 
-    “Hello, world!" | " "                   “Hello, world!”.split(“ ");
-    [“Spit”,”fire"] @ ""                    [“Spit”, “fire”].join(“”);
     S s = “Spitfire”[3..5]                  var s = "Spitfire".slice(3,6);
     S f = "Spitfire"[3..]                   var f = "Spitfire".slice(3);
     “Spitfire is quick” % "is"              "Spitfire is quick".indexOf("is");  // 10
     “Spitfire is quick”[4]                  "Spitfire is quick"[4]              // 'f'
     
-**TYPECASTING**
-
-In Spitfire, users can typecast any expression with the `::` operator.
-    
-    “2”::N                                 parseInt("2");
-    3::S                                   3 .toString();
-    C a = '8'                              var a = 'c';
-    S b = a::S                             var b = String.valueOf(c);
-    S c = "f"                              var c = "f";
-    C d = c::C                             var d = c.charAt(0);
 
 **LOOPS**
 
@@ -230,8 +218,7 @@ Here is the syntax for Spitfire. Our EBNF symbols are as follows: `|` is for alt
     EXP3          →  EXP4 (ADDOP EXP4)*
     EXP4          →  EXP5 (MULOP EXP5)*
     EXP5          →  PREFIXOP? EXP6
-    EXP6          →  EXP7 ('::' TYPE | '@' EXP7 | '|' EXP7)?
-    EXP7          →  'T' | 'F' | NUMLIT | STRLIT | VAREXP | '(' EXP ')'
+    EXP6          →  'T' | 'F' | NUMLIT | STRLIT | VAREXP | '(' EXP ')'
     VAREXP        →  ID ('[' EXP ']' | '.' ID | ARGS)*
     ADDOP         →  '+' | '-'
     MULOP         →  '*' | '/' | '%' | '^' | '**'
