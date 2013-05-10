@@ -54,10 +54,10 @@ public class RangeLoop extends Statement {
         if (step != null) {
             step.analyze(log, table, owner, inLoop);
         }
-        low.assertInteger("range loop", log);
-        high.assertInteger("range loop", log);
+        low.assertInteger("LU", log);
+        high.assertInteger("LU", log);
         if (step != null) {
-            step.assertInteger("range loop", log);
+            step.assertInteger("LU", log);
         }
         body.createTable(table);
         iterator = new Variable(iteratorName, Type.NUMBER);
