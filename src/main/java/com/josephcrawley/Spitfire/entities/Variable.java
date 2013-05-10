@@ -59,7 +59,7 @@ public class Variable extends Declaration {
 
         // If initializer is not present, then there had better be a type.
         if (initializer == null && typename == null) {
-            log.error("intializer.or.type.required");
+            log.error("initializer_or_type_required");
             type = Type.ARBITRARY;
         }
 
@@ -75,7 +75,7 @@ public class Variable extends Declaration {
                 // Here is the type inference part
                 type = initializer.type;
             } else {
-                initializer.assertAssignableTo(type, log, "initializer.type.mismatch");
+                initializer.assertAssignableTo(type, log, "variable_initialization_type_mismatch");
             }
         }
     }
