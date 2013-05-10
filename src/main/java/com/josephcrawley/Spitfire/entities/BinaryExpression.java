@@ -75,7 +75,7 @@ public class BinaryExpression extends Expression {
             type = Type.BOOLEAN;
 
         // equals or not equals on primitives
-        } else if (op.matches("=|!=")) {
+        } else if (op.matches("==|!=")) {
             if (!(left.type.isPrimitive() &&
                     (left.isCompatibleWith(right.type) || right.isCompatibleWith(left.type)))) {
                 log.error("eq.type.error", op, left.type, right.type);
@@ -84,7 +84,7 @@ public class BinaryExpression extends Expression {
 
         // bool and bool
         // bool or bool
-        } else if (op.matches("and|or")) {
+        } else if (op.matches("&&|\|\|")) {
             left.assertBoolean(op, log);
             right.assertBoolean(op, log);
             type = Type.BOOLEAN;
