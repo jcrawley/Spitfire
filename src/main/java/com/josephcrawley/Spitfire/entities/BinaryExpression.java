@@ -81,7 +81,6 @@ public class BinaryExpression extends Expression {
         // bool and bool
         // bool or bool
 
-        } else if (op.matches("&&|'!!'")) {
 
         } else if (op.matches("&&|'||'")) {
             left.assertBoolean(op, log);
