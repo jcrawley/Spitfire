@@ -22,10 +22,7 @@ public class Function extends Subroutine {
 
     @Override
     public void analyzeSignature(Log log, SymbolTable table, Subroutine owner, boolean inLoop) {
-<<<<<<< HEAD
-        
-=======
->>>>>>> a59a3ed85e8b9f3528727e9704d6acc7b0849eea
+
         super.analyzeSignature(log, table, owner, inLoop);
     }
 }

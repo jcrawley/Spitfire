@@ -80,11 +80,10 @@ public class BinaryExpression extends Expression {
 
         // bool and bool
         // bool or bool
-<<<<<<< HEAD
+
         } else if (op.matches("&&|'!!'")) {
-=======
-        } else if (op.matches("&&|\|\|")) {
->>>>>>> a59a3ed85e8b9f3528727e9704d6acc7b0849eea
+
+        } else if (op.matches("&&|'||'")) {
             left.assertBoolean(op, log);
             right.assertBoolean(op, log);
             type = Type.BOOLEAN;

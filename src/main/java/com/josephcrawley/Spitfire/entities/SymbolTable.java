@@ -141,12 +141,32 @@ public class SymbolTable extends Entity {
     }
 
 	public Function lookupFunction(String name, List<Expression> args, Log log) {
-		// TODO Auto-generated method stub
-		return null;
+		Object value = map.get(name);
+
+        if (value == null) {
+            if (parent == null) {
+                log.error("function.not.found", name);
+                return null;
+            } else {
+                return parent.lookupFunction(name,args, log);
+            }
+        } else if (value instanceof Function) {
+            return (Function)value;
+        } else {
+            log.error("not.a.function", name);
+            return null;
+        }
 	}
 
 	public Variable lookupVariable(String name, Log log) {
-		// TODO Auto-generated method stub
-		return null;
+		Entity value = map.get(name);
+        if (value != null && value instanceof Variable) {
+            return (Variable)value;
+        } else if (parent == null) {
+            log.error("not.found", name);
+            return Variable.ARBITRARY;
+        } else {
+            return parent.lookupVariable(name, log);
+        }
 	}
 }
