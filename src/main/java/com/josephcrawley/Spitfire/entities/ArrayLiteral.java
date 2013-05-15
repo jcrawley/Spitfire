@@ -12,33 +12,33 @@ import com.josephcrawley.util.Log;
  * <li>new string[]{}
  * </ul>
  */
-public class ArrayLiteral{
+public class ArrayLiteral extends Expression {
 
 
     private List<Expression> args;
 
-    public ArrayLiteral(List<Expression> args) { 
+    public ArrayLiteral(List<Expression> args) {
         this.args = args;
     }
-    
-    public ArrayLiteral(ArrayList<Expression> args) { 
+
+    public ArrayLiteral(ArrayList<Expression> args) {
         this.args = args;
     }
     public String getTypename() {
-    	if(args.size() <= 0){
-    		return "<arbitrary array>";
-    	}
-    	else{ return args.get(0).getType().getName();}
+        if(args.size() <= 0){
+            return "<arbitrary array>";
+        }
+        else{ return args.get(0).getType().getName();}
     }
 
     public List<Expression> getArgs() {
         return args;
     }
 
-	public void analyze(Log log, SymbolTable table, Subroutine owner,
-			boolean inLoop) {
-		// TODO Auto-generated method stub
-		
-	}
-    
+    public void analyze(Log log, SymbolTable table, Subroutine owner,
+            boolean inLoop) {
+        // TODO Auto-generated method stub
+
+    }
+
 }
